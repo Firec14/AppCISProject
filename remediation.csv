@@ -1,0 +1,1345 @@
+chapter_id,remediation,page_number
+2,"Edit or create the file /etc/modprobe.d/CIS.conf and add the following line: 
+install cramfs /bin/true 
+ 
+Run the following command to unload the cramfs module: 
+# rmmod cramfs 
+ 
+CIS Controls: 
+13 Data Protection 
+Data Protection",22
+2,"Edit or create the file /etc/modprobe.d/CIS.conf and add the following line: 
+install freevxfs /bin/true 
+ 
+Run the following command to unload the freevxfs module: 
+# rmmod freevxfs 
+ 
+CIS Controls: 
+13 Data Protection 
+Data Protection",23
+3,"Edit or create the file /etc/modprobe.d/CIS.conf and add the following line: 
+install jffs2 /bin/true 
+ 
+Run the following command to unload the jffs2 module: 
+# rmmod jffs2 
+ 
+CIS Controls: 
+13 Data Protection 
+Data Protection",24
+4,"Edit or create the file /etc/modprobe.d/CIS.conf and add the following line: 
+install hfs /bin/true 
+ 
+Run the following command to unload the hfs module: 
+# rmmod hfs 
+ 
+CIS Controls: 
+13 Data Protection 
+Data Protection",25
+5,"Edit or create the file /etc/modprobe.d/CIS.conf and add the following line: 
+install hfsplus /bin/true 
+ 
+Run the following command to unload the hfsplus module: 
+# rmmod hfsplus 
+ 
+CIS Controls: 
+13 Data Protection 
+Data Protection",26
+6,"Edit or create the file /etc/modprobe.d/CIS.conf and add the following line: 
+install udf /bin/true 
+ 
+Run the following command to unload the udf module: 
+# rmmod udf 
+ 
+CIS Controls: 
+13 Data Protection 
+Data Protection",27
+7,"For new installations, during installation create a custom partition setup and specify a 
+separate partition for /tmp. 
+For systems that were previously installed, create a new partition and configure 
+/etc/fstab as appropriate.",28
+8,"Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /tmp 
+partition. See the fstab(5) manual page for more information. 
+Run the following command to remount /tmp: 
+# mount -o remount,nodev /tmp",30
+9,"Edit the /etc/fstab file and add nosuid to the fourth field (mounting options) for the /tmp 
+partition. See the fstab(5) manual page for more information. 
+Run the following command to remount /tmp: 
+# mount -o remount,nosuid /tmp",31
+10,"For new installations, during installation create a custom partition setup and specify a 
+separate partition for /var. 
+For systems that were previously installed, create a new partition and configure 
+/etc/fstab as appropriate.",32
+11,"For new installations, during installation create a custom partition setup and specify a 
+separate partition for /var/tmp . 
+For systems that were previously installed, create a new partition and configure 
+/etc/fstab as appropriate.",33
+12,"Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the 
+/var/tmp partition. See the fstab(5) manual page for more information. 
+Run the following command to remount /var/tmp: 
+# mount -o remount,nodev /var/tmp",35
+13,"Edit the /etc/fstab file and add nosuid to the fourth field (mounting options) for the 
+/var/tmp partition. See the fstab(5) manual page for more information. 
+Run the following command to remount /var/tmp: 
+# mount -o remount,nosuid /var/tmp",36
+14,"Edit the /etc/fstab file and add noexec to the fourth field (mounting options) for the 
+/var/tmp partition. See the fstab(5) manual page for more information. 
+Run the following command to remount /var/tmp: 
+# mount -o remount,noexec /var/tmp 
+ 
+CIS Controls: 
+2 Inventory of Authorized and Unauthorized Software 
+Inventory of Authorized and Unauthorized Software",37
+15,"For new installations, during installation create a custom partition setup and specify a 
+separate partition for /var/log. 
+For systems that were previously installed, create a new partition and configure 
+/etc/fstab as appropriate.",38
+16,"For new installations, during installation create a custom partition setup and specify a 
+separate partition for /var/log/audit. 
+For systems that were previously installed, create a new partition and configure 
+/etc/fstab as appropriate.",40
+17,"For new installations, during installation create a custom partition setup and specify a 
+separate partition for /home. 
+For systems that were previously installed, create a new partition and configure 
+/etc/fstab as appropriate.",42
+18,"Edit the /etc/fstabfile and add nodevto the fourth field (mounting options) for the /home 
+partition. See the fstab(5)manual page for more information. 
+# mount -o remount,nodev /home",43
+18,"Edit the /etc/fstabfile and add nodevto the fourth field (mounting options) for the 
+/run/shm partition. See the fstab(5)manual page for more information. 
+Run the following command to remount /run/shm: 
+# mount -o remount,nodev /run/shm",44
+18,"Edit the /etc/fstabfile and add nosuidto the fourth field (mounting options) for the 
+/run/shm partition. See the fstab(5)manual page for more information. 
+Run the following command to remount /run/shm: 
+# mount -o remount,nosuid /run/shm",45
+18,"Edit the /etc/fstabfile and add noexecto the fourth field (mounting options) for the 
+/run/shm partition. See the fstab(5)manual page for more information. 
+Run the following command to remount /run/shm: 
+# mount -o remount,noexec /run/shm",46
+18,"Edit the /etc/fstabfile and add nodev to the fourth field (mounting options) of all 
+removable media partitions. Look for entries that have mount points that contain words 
+such as floppy or cdrom. See the fstab(5)manual page for more information.",47
+18,"Edit the /etc/fstabfile and add nosuid to the fourth field (mounting options) of all 
+removable media partitions. Look for entries that have mount points that contain words 
+such as floppy or cdrom. See the fstab(5)manual page for more information.",48
+18,"Edit the /etc/fstabfile and add noexec to the fourth field (mounting options) of all 
+removable media partitions. Look for entries that have mount points that contain words 
+such as floppy or cdrom. See the fstab(5)manual page for more information. 
+CIS Controls: 
+8 Malware Defenses 
+Malware Defenses",49
+18,"Run the following command to set the sticky bit on all world writable directories: 
+# df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev 
+-type d -perm -0002 2>/dev/null | xargs chmod a+t",50
+18,"Remove or comment out start lines in /etc/init/autofs.conf: 
+#start on runlevel [2345]",51
+18,"Configure your package manager repositories according to site policy. 
+CIS Controls:",53
+18,"Update your package manager GPG keys in accordance with site policy. 
+CIS Controls: 
+4.5 Use Automated Patch Management And Software Update Tools 
+Deploy automated patch management tools and software update tools for operating system 
+and software/applications on all systems for which such tools are available and safe. 
+Patches should be applied to all systems, even systems that are properly air gapped.",55
+18,"Run the following command to install AIDE: 
+# apt-get install aide aide-common 
+ 
+Configure AIDE as appropriate for your environment. Consult the AIDE documentation for 
+options. 
+Initialize AIDE:",56
+18,"Run the following command: 
+# crontab -u root -e 
+ 
+Add the following line to the crontab: 
+0 5 * * * /usr/bin/aide --config /etc/aide/aide.conf --check",58
+18,"Run the following commands to set permissions on your grub configuration: 
+# chown root:root /boot/grub/grub.cfg 
+# chmod og-rwx /boot/grub/grub.cfg",60
+18,"Create an encrypted password with grub-mkpasswd-pbkdf2: 
+# grub-mkpasswd-pbkdf2 
+Enter password: <password> 
+Reenter password: <password> 
+Your PBKDF2 is <encrypted-password> 
+ 
+Add the following into /etc/grub.d/00_header or a custom /etc/grub.d configuration file: 
+cat <<EOF 
+set superusers=""<username>"" 
+password_pbkdf2 <username> <encrypted-password> 
+EOF 
+ 
+Run the following command to update the grub2 configuration:",62
+18,"Run the following command and follow the prompts to set a password for the rootuser: 
+# passwd root 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",64
+18,"Add the following line to /etc/security/limits.conf or a /etc/security/limits.d/* 
+file: 
+* hard core 0 
+ 
+Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file:",65
+18,"On 32 bit systems install a kernel with PAE support, no installation is required on 64 bit 
+systems: 
+If necessary configure your bootloader to load the new kernel and reboot the system. 
+You may need to enable NX or XD support in your bios.",67
+18,"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+kernel.randomize_va_space = 2 
+ 
+Run the following command to set the active kernel parameter: 
+# sysctl -w kernel.randomize_va_space=2 
+ 
+CIS Controls: 
+8.4 Enable Anti-exploitation Features (i.e. DEP, ASLR, EMET) 
+Enable anti-exploitation features such as Data Execution Prevention (DEP), Address Space 
+Layout Randomization (ASLR), virtualization/containerization, etc. For increased",69
+18,"Run the following command to restore binaries to normal: 
+# prelink -ua 
+ 
+Run the following command to uninstall prelink: 
+# apt-get remove prelink 
+ 
+CIS Controls: 
+3.5 Use File Integrity Tools For Critical System Files 
+Use file integrity checking tools to ensure that critical system files (including sensitive 
+system and application executables, libraries, and configurations) have not been altered. 
+The reporting system should: have the ability to account for routine and expected changes; 
+highlight and alert on unusual or unexpected alterations; show the history of configuration",71
+18,"Edit /etc/default/grub and remove all instances of selinux=0 and enforcing=0 from all 
+CMDLINE_LINUX parameters: 
+GRUB_CMDLINE_LINUX_DEFAULT=""quiet"" 
+GRUB_CMDLINE_LINUX="""" 
+ 
+Run the following command to update the grub2 configuration:",74
+18,"Edit the /etc/selinux/configfile to set the SELINUX parameter: 
+SELINUX=enforcing 
+ 
+CIS Controls: 
+14.4 Protect Information With Access Control Lists 
+All information stored on systems shall be protected with file system, network share, 
+claims, application, or database specific access control lists. These controls will enforce the 
+principle that only authorized individuals should have access to the information based on 
+their need to access the information as a part of their responsibilities.",76
+18,"Edit the /etc/selinux/configfile to set the SELINUXTYPE parameter: 
+SELINUXTYPE=ubuntu",77
+18,"Investigate any unconfined daemons found during the audit action. They may need to have 
+an existing security context assigned to them or a policy built for them.",78
+18,"Edit /etc/default/grub and remove all instances of apparmor=0 from all CMDLINE_LINUX 
+parameters: 
+GRUB_CMDLINE_LINUX_DEFAULT=""quiet"" 
+GRUB_CMDLINE_LINUX="""" 
+ 
+Run the following command to update the grub2 configuration: 
+# update-grub",80
+18,"Run the following command to set all profiles to enforce mode: 
+# aa-enforce /etc/apparmor.d/*  
+ 
+Any unconfined processes may need to have a profile created or activated for them and 
+then be restarted. 
+CIS Controls: 
+14.4 Protect Information With Access Control Lists 
+All information stored on systems shall be protected with file system, network share, 
+claims, application, or database specific access control lists. These controls will enforce the 
+principle that only authorized individuals should have access to the information based on 
+their need to access the information as a part of their responsibilities.",82
+18,"Run one of the following commands to install SELinux or apparmor: 
+# apt-get install selinux 
+# apt-get install apparmor 
+ 
+CIS Controls: 
+14.4 Protect Information With Access Control Lists 
+All information stored on systems shall be protected with file system, network share, 
+claims, application, or database specific access control lists. These controls will enforce the 
+principle that only authorized individuals should have access to the information based on 
+their need to access the information as a part of their responsibilities. 
+1.7 Warning Banners 
+Presenting a warning message prior to the normal user login may assist in the prosecution 
+of trespassers on the computer system. Changing some of these login banners also has the",83
+18,"Edit the /etc/motd file with the appropriate contents according to your site policy, remove 
+any instances of \m, \r, \s, or \v.",86
+18,"Edit the /etc/issue file with the appropriate contents according to your site policy, 
+remove any instances of \m , \r , \s , or \v :",87
+18,"Run the following commands to set permissions on /etc/motd: 
+# chown root:root /etc/motd 
+# chmod 644 /etc/motd 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",91
+18,"Run the following commands to set permissions on /etc/issue: 
+# chown root:root /etc/issue 
+# chmod 644 /etc/issue 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",92
+18,"Run the following commands to set permissions on /etc/issue.net: 
+# chown root:root /etc/issue.net 
+# chmod 644 /etc/issue.net 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",93
+18,"Create the /etc/dconf/profile/gdm file with the following contents: 
+user-db:user 
+system-db:gdm 
+file-db:/usr/share/gdm/greeter-dconf-defaults",94
+18,Use your package manager to update all packages on the system according to site policy.,96
+18,"Comment out or remove any lines starting with chargen from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all chargen services in /etc/xinetd.conf and /etc/xinetd.d/*.",98
+18,"Comment out or remove any lines starting with daytime from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all daytime services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",100
+18,"Comment out or remove any lines starting with discard from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all discard services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",101
+18,"Comment out or remove any lines starting with echo from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all echo services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",102
+18,"Comment out or remove any lines starting with time from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all time services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",103
+18,"Comment out or remove any lines starting with shell, login, or exec from 
+/etc/inetd.conf and /etc/inetd.d/*. 
+Set disable = yes on all rsh, rlogin, and rexec services in /etc/xinetd.conf and 
+/etc/xinetd.d/*. 
+CIS Controls: 
+3.4 Use Only Secure Channels For Remote System Administration 
+Perform all remote administration of servers, workstation, network devices, and similar 
+equipment over secure channels. Protocols such as telnet, VNC, RDP, or others that do not",104
+18,"Comment out or remove any lines starting with talk or ntalk from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all talk services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",106
+18,"Comment out or remove any lines starting with telnet from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all telnet services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+3.4 Use Only Secure Channels For Remote System Administration 
+Perform all remote administration of servers, workstation, network devices, and similar 
+equipment over secure channels. Protocols such as telnet, VNC, RDP, or others that do not 
+actively support strong encryption should only be used if they are performed over a 
+secondary encryption channel, such as SSL, TLS or IPSEC.",107
+18,"Comment out or remove any lines starting with tftp from /etc/inetd.conf and 
+/etc/inetd.d/*. 
+Set disable = yes on all tftp services in /etc/xinetd.conf and /etc/xinetd.d/*. 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",109
+18,"Remove or comment out start lines in /etc/init/xinetd.conf: 
+#start on runlevel [2345] 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",110
+18,"Run the following command to uninstall openbsd-inetd: 
+apt-get remove openbsd-inetd 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system. 
+2.2 Special Purpose Services 
+This section describes services that are installed on systems that specifically need to run 
+these services. If any of these services are not required, it is recommended that they be 
+disabled or deleted from the system to reduce the potential attack surface.",111
+18,"On physical systems or virtual systems where host based time synchronization is not 
+available install NTP or chrony using one of the following commands: 
+# apt-get install ntp 
+# apt-get install chrony",112
+18,"Add or edit server or pool lines to /etc/chrony/chrony.conf as appropriate: 
+server <remote-server> 
+ 
+CIS Controls: 
+6.1 Use At Least Two Synchronized Time Sources For All Servers And Network Equipment 
+Include at least two synchronized time sources from which all servers and network 
+equipment retrieve time information on a regular basis so that timestamps in logs are 
+consistent.",116
+18,"Run the following command to remove the X Windows System packages: 
+apt-get remove xserver-xorg* 
+ 
+CIS Controls: 
+2 Inventory of Authorized and Unauthorized Software 
+Inventory of Authorized and Unauthorized Software",117
+18,"Remove or comment out start lines in /etc/init/avahi-daemon.conf: 
+#start on runlevel [2345] 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",118
+18,"Remove or comment out start lines in /etc/init/cups.conf: 
+#start on runlevel [2345]",119
+18,"Remove or comment out start lines in /etc/init/isc-dhcp-server.confand 
+/etc/init/isc-dhcp-server6.conf: 
+#start on runlevel [2345]",121
+18,"Run the following command to disable slapd: 
+# update-rc.d slapd disable",122
+18,"Remove or comment out start lines in /etc/init/rpcbind.conf: 
+#start on start-rpcbind 
+ 
+Run the following command to disable nfs-kernel-server: 
+# update-rc.d nfs-kernel-server disable 
+ 
+CIS Controls:",123
+18,"Run the following command to disable bind9: 
+# update-rc.d bind9 disable 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",125
+18,"Remove or comment out start lines in /etc/init/vsftpd.conf: 
+#start on runlevel [2345] or net-device-up IFACE!=lo",126
+18,"Run the following command to disable apache2: 
+# update-rc.d apache2 disable 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",127
+18,"Remove or comment out start lines in /etc/init/dovecot.conf: 
+#start on runlevel [2345]",128
+18,"Remove or comment out start lines in /etc/init/smbd.conf: 
+#start on (local-filesystems and net-device-up) 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",129
+18,"Remove or comment out start lines in /etc/init/squid3.conf: 
+#start on runlevel [2345] 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",130
+18,"Run the following command to disable snmpd: 
+# update-rc.d snmpd disable",131
+18,"Edit /etc/postfix/main.cf and add the following line to the RECEIVING MAIL section. If 
+the line already exists, change it to look like the line below: 
+inet_interfaces = loopback-only 
+ 
+Restart postfix: 
+# service postfix restart",133
+18,"Edit the /etc/default/rsync file and set RSYNC_ENABLE to false: 
+RSYNC_ENABLE=false 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",135
+18,"Remove or comment out start lines in /etc/init/ypserv.conf: 
+#start on (started portmap ON_BOOT= 
+#          or (started portmap ON_BOOT=y 
+#              and ((filesystem and static-network-up) or failsafe-boot))) 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",136
+18,"Run the following command to uninstall nis: 
+apt-get remove nis",137
+18,"Run the following command to uninstall rsh: 
+apt-get remove rsh-client rsh-redone-client",139
+18,"Run the following command to uninstall talk: 
+apt-get remove talk",141
+18,"Run the following command to uninstall telnet: 
+# apt-get remove telnet",142
+18,"Uninstall ldap-utils using the appropriate package manager or manual installation: 
+# apt-get remove ldap-utils",144
+18,"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.ip_forward = 0 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.ip_forward=0 
+# sysctl -w net.ipv4.route.flush=1",146
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.conf.all.send_redirects = 0 
+net.ipv4.conf.default.send_redirects = 0 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.conf.all.send_redirects=0 
+# sysctl -w net.ipv4.conf.default.send_redirects=0 
+# sysctl -w net.ipv4.route.flush=1",148
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.conf.all.accept_source_route = 0 
+net.ipv4.conf.default.accept_source_route = 0 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.conf.all.accept_source_route=0 
+# sysctl -w net.ipv4.conf.default.accept_source_route=0 
+# sysctl -w net.ipv4.route.flush=1 
+ 
+CIS Controls: 
+3 Secure Configurations for Hardware and Software on Mobile Devices, Laptops, 
+Workstations, and Servers 
+Secure Configurations for Hardware and Software on Mobile Devices, Laptops, 
+Workstations, and Servers 
+11 Secure Configurations for Network Devices such as Firewalls, Routers and switches 
+Secure Configurations for Network Devices such as Firewalls, Routers and switches",151
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.conf.all.accept_redirects = 0 
+net.ipv4.conf.default.accept_redirects = 0 
+ 
+Run the following commands to set the active kernel parameters:",152
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.conf.all.secure_redirects = 0 
+net.ipv4.conf.default.secure_redirects = 0 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.conf.all.secure_redirects=0 
+# sysctl -w net.ipv4.conf.default.secure_redirects=0 
+# sysctl -w net.ipv4.route.flush=1",154
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.conf.all.log_martians = 1 
+net.ipv4.conf.default.log_martians = 1 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.conf.all.log_martians=1 
+# sysctl -w net.ipv4.conf.default.log_martians=1 
+# sysctl -w net.ipv4.route.flush=1",156
+18,"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.icmp_echo_ignore_broadcasts = 1 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1 
+# sysctl -w net.ipv4.route.flush=1",158
+18,"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.icmp_ignore_bogus_error_responses = 1 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1 
+# sysctl -w net.ipv4.route.flush=1 
+ 
+CIS Controls: 
+3 Secure Configurations for Hardware and Software on Mobile Devices, Laptops, 
+Workstations, and Servers",160
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.conf.all.rp_filter = 1 
+net.ipv4.conf.default.rp_filter = 1 
+ 
+Run the following commands to set the active kernel parameters:",162
+18,"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv4.tcp_syncookies = 1 
+ 
+Run the following commands to set the active kernel parameters:",164
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv6.conf.all.accept_ra = 0 
+net.ipv6.conf.default.accept_ra = 0 
+ 
+Run the following commands to set the active kernel parameters:",166
+18,"Set the following parameters in /etc/sysctl.conf or a /etc/sysctl.d/* file: 
+net.ipv6.conf.all.accept_redirects = 0 
+net.ipv6.conf.default.accept_redirects = 0 
+ 
+Run the following commands to set the active kernel parameters: 
+# sysctl -w net.ipv6.conf.all.accept_redirects=0 
+# sysctl -w net.ipv6.conf.default.accept_redirects=0 
+# sysctl -w net.ipv6.route.flush=1",168
+18,"Edit /etc/default/grub and add 'ipv6.disable=1' to GRUB_CMDLINE_LINUX: 
+GRUB_CMDLINE_LINUX=""ipv6.disable=1"" 
+ 
+Run the following command to update the grub2 configuration: 
+# update-grub 
+ 
+CIS Controls: 
+3 Secure Configurations for Hardware and Software on Mobile Devices, Laptops, 
+Workstations, and Servers 
+Secure Configurations for Hardware and Software on Mobile Devices, Laptops, 
+Workstations, and Servers 
+11 Secure Configurations for Network Devices such as Firewalls, Routers and switches 
+Secure Configurations for Network Devices such as Firewalls, Routers and switches",170
+18,"Run the following command to install TCP Wrappers: 
+apt-get install tcpd",171
+18,"Run the following command to create /etc/hosts.allow: 
+# echo ""ALL: <net>/<mask>, <net>/<mask>, ..."" >/etc/hosts.allow 
+ 
+where each <net>/<mask> combination (for example, ""192.168.1.0/255.255.255.0"") 
+represents one network block in use by your organization that requires access to this 
+system.",173
+18,"Run the following command to create /etc/hosts.deny: 
+# echo ""ALL: ALL"" >> /etc/hosts.deny",174
+18,"Run the following commands to set permissions on /etc/hosts.allow: 
+# chown root:root /etc/hosts.allow 
+# chmod 644 /etc/hosts.allow 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",175
+18,"Run the following commands to set permissions on /etc/hosts.deny : 
+# chown root:root /etc/hosts.deny 
+# chmod 644 /etc/hosts.deny 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",176
+18,"Edit or create the file /etc/modprobe.d/CIS.confand add the following line: 
+install dccp /bin/true 
+ 
+CIS Controls:",177
+18,"Edit or create the file /etc/modprobe.d/CIS.confand add the following line: 
+install sctp /bin/true 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",179
+18,"Edit or create the file /etc/modprobe.d/CIS.confand add the following line: 
+install rds /bin/true 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",180
+18,"Edit or create the file /etc/modprobe.d/CIS.confand add the following line: 
+install tipc /bin/true 
+ 
+CIS Controls: 
+9.1 Limit Open Ports, Protocols, and Services 
+Ensure that only ports, protocols, and services with validated business needs are running 
+on each system.",181
+18,"Run the following command to install iptables: 
+# apt-get install iptables 
+ 
+CIS Controls: 
+9.2 Leverage Host-based Firewalls 
+Apply host-based firewalls or port filtering tools on end systems, with a default-deny rule 
+that drops all traffic except those services and ports that are explicitly allowed.",183
+18,"Run the following commands to implement a default DROP policy: 
+# iptables -P INPUT DROP 
+# iptables -P OUTPUT DROP 
+# iptables -P FORWARD DROP",184
+18,"Run the following commands to implement the loopback rules: 
+# iptables -A INPUT -i lo -j ACCEPT 
+# iptables -A OUTPUT -o lo -j ACCEPT 
+# iptables -A INPUT -s 127.0.0.0/8 -j DROP",186
+18,"Configure iptables in accordance with site policy. The following commands will implement 
+a policy to allow all outbound connections and all established connections: 
+# iptables -A OUTPUT -p tcp -m state --state NEW,ESTABLISHED -j ACCEPT 
+# iptables -A OUTPUT -p udp -m state --state NEW,ESTABLISHED -j ACCEPT 
+# iptables -A OUTPUT -p icmp -m state --state NEW,ESTABLISHED -j ACCEPT 
+# iptables -A INPUT -p tcp -m state --state ESTABLISHED -j ACCEPT 
+# iptables -A INPUT -p udp -m state --state ESTABLISHED -j ACCEPT 
+# iptables -A INPUT -p icmp -m state --state ESTABLISHED -j ACCEPT",188
+18,"For each port identified in the audit which does not have a firewall rule establish a proper 
+rule for accepting inbound connections:",190
+18,"Run the following command to disable any wireless interfaces: 
+# ip link set <interface> down 
+ 
+Disable any wireless interfaces in your network configuration.",192
+18,"Set the following parameter in /etc/audit/auditd.conf in accordance with site policy: 
+max_log_file = <MB>",195
+18,"Set the following parameters in /etc/audit/auditd.conf: 
+space_left_action = email 
+action_mail_acct = root 
+admin_space_left_action = halt 
+ 
+CIS Controls: 
+6.3 Ensure Audit Logging Systems Are Not Subject To Loss (i.e. rotation/archive) 
+Ensure that all systems that store logs have adequate storage space for the logs generated 
+on a regular basis, so that log files will not fill up between log rotation intervals. The logs 
+must be archived and digitally signed on a periodic basis.",197
+18,"Set the following parameter in /etc/audit/auditd.conf: 
+max_log_file_action = keep_logs 
+ 
+CIS Controls: 
+6.3 Ensure Audit Logging Systems Are Not Subject To Loss (i.e. rotation/archive) 
+Ensure that all systems that store logs have adequate storage space for the logs generated 
+on a regular basis, so that log files will not fill up between log rotation intervals. The logs 
+must be archived and digitally signed on a periodic basis.",198
+18,"Run the following command to enable auditd: 
+# update-rc.d auditd enable 
+ 
+CIS Controls: 
+6.2 Ensure Audit Log Settings Support Appropriate Log Entry Formatting 
+Validate audit log settings for each hardware device and the software installed on it, 
+ensuring that logs include a date, timestamp, source addresses, destination addresses, and 
+various other useful elements of each packet and/or transaction. Systems should record 
+logs in a standardized format such as syslog entries or those outlined by the Common Event 
+Expression initiative. If systems cannot generate logs in a standardized format, log 
+normalization tools can be deployed to convert logs into such a format.",199
+18,"Edit /etc/default/grub and add audit=1 to GRUB_CMDLINE_LINUX: 
+GRUB_CMDLINE_LINUX=""audit=1"" 
+ 
+Run the following command to update the grub2 configuration: 
+# update-grub",200
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-
+change 
+-a always,exit -F arch=b32 -S clock_settime -k time-change 
+-w /etc/localtime -p wa -k time-change 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change 
+-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-
+change 
+-a always,exit -F arch=b64 -S clock_settime -k time-change 
+-a always,exit -F arch=b32 -S clock_settime -k time-change 
+-w /etc/localtime -p wa -k time-change",203
+18,"Add the following lines to the /etc/audit/audit.rules file: 
+-w /etc/group -p wa -k identity 
+-w /etc/passwd -p wa -k identity 
+-w /etc/gshadow -p wa -k identity",204
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale 
+-w /etc/issue -p wa -k system-locale 
+-w /etc/issue.net -p wa -k system-locale 
+-w /etc/hosts -p wa -k system-locale 
+-w /etc/sysconfig/network -p wa -k system-locale 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale 
+-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale 
+-w /etc/issue -p wa -k system-locale 
+-w /etc/issue.net -p wa -k system-locale 
+-w /etc/hosts -p wa -k system-locale 
+-w /etc/sysconfig/network -p wa -k system-locale",207
+18,"Add the following lines to the /etc/audit/audit.rules file: 
+-w /var/log/faillog -p wa -k logins 
+-w /var/log/lastlog -p wa -k logins 
+-w /var/log/tallylog -p wa -k logins",211
+18,"Add the following lines to the /etc/audit/audit.rules file: 
+-w /var/run/utmp -p wa -k session 
+-w /var/log/wtmp -p wa -k logins 
+-w /var/log/btmp -p wa -k logins",214
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F 
+auid!=4294967295 -k perm_mod 
+-a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F 
+auid>=1000 -F auid!=4294967295 -k perm_mod 
+-a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S 
+removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 
+-k perm_mod 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F 
+auid!=4294967295 -k perm_mod 
+-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F 
+auid!=4294967295 -k perm_mod 
+-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F 
+auid>=1000 -F auid!=4294967295 -k perm_mod 
+-a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F 
+auid>=1000 -F auid!=4294967295 -k perm_mod 
+-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S 
+removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 
+-k perm_mod 
+-a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S 
+removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 
+-k perm_mod",216
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S 
+ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access 
+-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S 
+ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S 
+ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access 
+-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S 
+ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access 
+-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S 
+ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access 
+-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S 
+ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access",219
+18,"To remediate this issue, the system administrator will have to execute a find command to 
+locate all the privileged programs and then add an audit line for each one of them. The 
+audit parameters associated with this are as follows: 
+-F path="" $1 "" - will populate each file name found through the find command and 
+processed by awk. -F perm=x - will write an audit record if the file is executed. -F 
+auid>=1000 - will write a record if the user executing the command is not a privileged user. 
+-F auid!= 4294967295 - will ignore Daemon events 
+All audit records should be tagged with the identifier ""privileged"". 
+Run the following command replacing with a list of partitions where programs can be 
+executed from on your system:",220
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k 
+mounts 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k 
+mounts 
+-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k 
+mounts",223
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F 
+auid>=1000 -F auid!=4294967295 -k delete 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F 
+auid>=1000 -F auid!=4294967295 -k delete 
+-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F 
+auid>=1000 -F auid!=4294967295 -k delete",225
+18,"Add the following line to the /etc/audit/audit.rules file: 
+-w /etc/sudoers -p wa -k scope 
+-w /etc/sudoers.d/ -p wa -k scope",226
+18,"Add the following lines to the /etc/audit/audit.rules file: 
+-w /var/log/sudo.log -p wa -k actions",228
+18,"For 32 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-w /sbin/insmod -p x -k modules 
+-w /sbin/rmmod -p x -k modules 
+-w /sbin/modprobe -p x -k modules 
+-a always,exit -F arch=b32 -S init_module -S delete_module -k modules 
+ 
+For 64 bit systems add the following lines to the /etc/audit/audit.rules file: 
+-w /sbin/insmod -p x -k modules 
+-w /sbin/rmmod -p x -k modules 
+-w /sbin/modprobe -p x -k modules 
+-a always,exit -F arch=b64 -S init_module -S delete_module -k modules",231
+18,"Add the following line to the end of the /etc/audit/audit.rules file. 
+-e 2",232
+18,"Set the proper start conditions in /etc/init/rsyslog.conf: 
+start on filesystem 
+ 
+CIS Controls: 
+6.2 Ensure Audit Log Settings Support Appropriate Log Entry Formatting 
+Validate audit log settings for each hardware device and the software installed on it,",234
+18,"Edit the following lines in the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files as 
+appropriate for your environment: 
+*.emerg                                  :omusrmsg:* 
+mail.*                                  -/var/log/mail 
+mail.info                               -/var/log/mail.info 
+mail.warning                            -/var/log/mail.warn 
+mail.err                                 /var/log/mail.err 
+news.crit                               -/var/log/news/news.crit 
+news.err                                -/var/log/news/news.err 
+news.notice                             -/var/log/news/news.notice 
+*.=warning;*.=err                       -/var/log/warn 
+*.crit                                   /var/log/warn 
+*.*;mail.none;news.none                 -/var/log/messages 
+local0,local1.*                         -/var/log/localmessages 
+local2,local3.*                         -/var/log/localmessages 
+local4,local5.*                         -/var/log/localmessages 
+local6,local7.*                         -/var/log/localmessages",236
+18,"Edit the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files and set $FileCreateMode to 
+0640 or more restrictive: 
+$FileCreateMode 0640",238
+18,"Edit the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files and add the following line 
+(where loghost.example.com is the name of your central log host). 
+*.* @@loghost.example.com 
+ 
+Run the following command to reload the rsyslogd configuration: 
+# pkill -HUP rsyslogd",240
+18,"For hosts that are designated as log hosts, edit the /etc/rsyslog.conf file and un-
+comment or add the following lines: 
+$ModLoad imtcp 
+$InputTCPServerRun 514 
+ 
+For hosts that are not designated as log hosts, edit the /etc/rsyslog.conf file and 
+comment or remove the following lines:",242
+18,"Run the following command to enable syslog-ng: 
+# update-rc.d syslog-ng enable 
+ 
+CIS Controls:",244
+18,"Edit the log lines in the /etc/syslog-ng/syslog-ng.conf file as appropriate for your 
+environment: 
+log { source(src); source(chroots); filter(f_console); destination(console); 
+}; 
+log { source(src); source(chroots); filter(f_console); destination(xconsole); 
+}; 
+log { source(src); source(chroots); filter(f_newscrit); 
+destination(newscrit); }; 
+log { source(src); source(chroots); filter(f_newserr); destination(newserr); 
+}; 
+log { source(src); source(chroots); filter(f_newsnotice); 
+destination(newsnotice); }; 
+log { source(src); source(chroots); filter(f_mailinfo); 
+destination(mailinfo); }; 
+log { source(src); source(chroots); filter(f_mailwarn); 
+destination(mailwarn); }; 
+log { source(src); source(chroots); filter(f_mailerr);  destination(mailerr); 
+};",246
+18,"Edit the /etc/syslog-ng/syslog-ng.conf and set perm option to 0640 or more restrictive: 
+options { chain_hostnames(off); flush_lines(0); perm(0640); stats_freq(3600); 
+threaded(yes); };",248
+18,"Edit the /etc/syslog-ng/syslog-ng.conf file and add the following lines (where 
+logfile.example.com is the name of your central log host). 
+destination logserver { tcp(""logfile.example.com"" port(514)); }; 
+log { source(src); destination(logserver); }; 
+ 
+Run the following command to reload the syslog-ng configuration: 
+# pkill -HUP syslog-ng",249
+18,"On designated log hosts edit the /etc/syslog-ng/syslog-ng.conf file and configure the 
+following lines are appropriately: 
+source net{ tcp(); }; 
+destination remote { file(""/var/log/remote/${FULLHOST}-log""); }; 
+log { source(net); destination(remote); }; 
+ 
+On non designated log hosts edit the /etc/syslog-ng/syslog-ng.conf file and remove or 
+edit any sources that accept network sourced log messages. 
+Run the following command to reload the syslog-ng configuration: 
+# pkill -HUP syslog-ng",251
+18,"Install rsyslog or syslog-ng using one of the following commands: 
+# apt-get install rsyslog 
+# apt-get install syslog-ng 
+ 
+CIS Controls: 
+6.2 Ensure Audit Log Settings Support Appropriate Log Entry Formatting 
+Validate audit log settings for each hardware device and the software installed on it, 
+ensuring that logs include a date, timestamp, source addresses, destination addresses, and 
+various other useful elements of each packet and/or transaction. Systems should record 
+logs in a standardized format such as syslog entries or those outlined by the Common Event",253
+18,"Run the following command to set permissions on all existing log files: 
+# chmod -R g-wx,o-rwx /var/log/*",255
+18,"Edit /etc/logrotate.conf and /etc/logrotate.d/* to ensure logs are rotated according 
+to site policy.",256
+18,"Edit start lines in /etc/init/cron.confto match the following: 
+start on runlevel [2345] 
+ 
+CIS Controls: 
+6 Maintenance, Monitoring, and Analysis of Audit Logs 
+Maintenance, Monitoring, and Analysis of Audit Logs",258
+18,"Run the following commands to set ownership and permissions on /etc/crontab: 
+# chown root:root /etc/crontab 
+# chmod og-rwx /etc/crontab 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",259
+18,"Run the following commands to set ownership and permissions on /etc/cron.hourly : 
+# chown root:root /etc/cron.hourly 
+# chmod og-rwx /etc/cron.hourly 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are",260
+18,"Run the following commands to set ownership and permissions on /etc/cron.daily : 
+# chown root:root /etc/cron.daily 
+# chmod og-rwx /etc/cron.daily 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are",262
+18,"Run the following commands to set ownership and permissions on /etc/cron.weekly : 
+# chown root:root /etc/cron.weekly 
+# chmod og-rwx /etc/cron.weekly 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are",264
+18,"Run the following commands to set ownership and permissions on /etc/cron.monthly : 
+# chown root:root /etc/cron.monthly 
+# chmod og-rwx /etc/cron.monthly 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are",266
+18,"Run the following commands to set ownership and permissions on /etc/cron.d : 
+# chown root:root /etc/cron.d 
+# chmod og-rwx /etc/cron.d 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are",268
+18,"Run the following commands to set ownership and permissions on /etc/ssh/sshd_config: 
+# chown root:root /etc/ssh/sshd_config 
+# chmod og-rwx /etc/ssh/sshd_config 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",273
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+Protocol 2 
+ 
+CIS Controls: 
+3.4 Use Only Secure Channels For Remote System Administration 
+Perform all remote administration of servers, workstation, network devices, and similar 
+equipment over secure channels. Protocols such as telnet, VNC, RDP, or others that do not 
+actively support strong encryption should only be used if they are performed over a 
+secondary encryption channel, such as SSL, TLS or IPSEC.",274
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+LogLevel INFO 
+ 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",275
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+X11Forwarding no",276
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+MaxAuthTries 4 
+ 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",277
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+IgnoreRhosts yes 
+ 
+CIS Controls: 
+9 Limitation and Control of Network Ports, Protocols, and Services 
+Limitation and Control of Network Ports, Protocols, and Services",278
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+HostbasedAuthentication no 
+ 
+CIS Controls: 
+9 Limitation and Control of Network Ports, Protocols, and Services 
+Limitation and Control of Network Ports, Protocols, and Services",279
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+PermitRootLogin no 
+ 
+CIS Controls: 
+5.8 Administrators Should Not Directly Log In To A System (i.e. use RunAs/sudo) 
+Administrators should be required to access a system using a fully logged and non-
+administrative account. Then, once logged on to the machine without administrative 
+privileges, the administrator should transition to administrative privileges using tools such 
+as Sudo on Linux/UNIX, RunAs on Windows, and other similar facilities for other types of 
+systems.",280
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+PermitEmptyPasswords no 
+ 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",281
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+PermitUserEnvironment no 
+ 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",282
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-
+etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com",283
+18,Edit the /etc/ssh/sshd_config file to set the parameters according to site policy:,285
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+LoginGraceTime 60",287
+18,"Edit the /etc/ssh/sshd_config file to set one or more of the parameter as follows: 
+AllowUsers <userlist> 
+AllowGroups <grouplist> 
+DenyUsers <userlist> 
+DenyGroups <grouplist> 
+ 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior. 
+5.8 Administrators Should Not Directly Log In To A System (i.e. use RunAs/sudo) 
+Administrators should be required to access a system using a fully logged and non-
+administrative account. Then, once logged on to the machine without administrative 
+privileges, the administrator should transition to administrative privileges using tools such 
+as Sudo on Linux/UNIX, RunAs on Windows, and other similar facilities for other types of 
+systems.",289
+18,"Edit the /etc/ssh/sshd_config file to set the parameter as follows: 
+Banner /etc/issue.net",290
+18,"Run the following command to install the pam_pwquality module: 
+apt-get install libpam-pwquality 
+ 
+Edit the /etc/pam.d/common-password file to include the appropriate options for 
+pam_pwquality.so and to conform to site policy: 
+password requisite pam_pwquality.so retry=3 
+ 
+Edit /etc/security/pwquality.conf to add or update the following settings to conform to 
+site policy: 
+minlen = 14 
+dcredit = -1 
+ucredit = -1 
+ocredit = -1 
+lcredit = -1",292
+18,"Edit the /etc/pam.d/common-auth file and add the auth line below: 
+auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900",294
+18,"Edit the /etc/pam.d/common-password file to include the remember option and conform to 
+site policy as shown: 
+password required pam_pwhistory.so remember=5",296
+18,"Edit the /etc/pam.d/common-password file to include the sha512 option for pam_unix.so as 
+shown: 
+password [success=1 default=ignore] pam_unix.so sha512",297
+18,"Set the PASS_MAX_DAYS parameter to conform to site policy in /etc/login.defs : 
+PASS_MAX_DAYS 90 
+ 
+Modify user parameters for all users with a password set to match: 
+# chage --maxdays 90 <user>",300
+18,"Set the PASS_MIN_DAYS parameter to 7 in /etc/login.defs : 
+PASS_MIN_DAYS 7 
+ 
+Modify user parameters for all users with a password set to match:",301
+18,"Set the PASS_WARN_AGE parameter to 7 in /etc/login.defs: 
+PASS_WARN_AGE 7 
+ 
+Modify user parameters for all users with a password set to match: 
+# chage --warndays 7 <user>",303
+18,"Run the following command to set the default password inactivity period to 30 days: 
+# useradd -D -f 30 
+ 
+Modify user parameters for all users with a password set to match: 
+# chage --inactive 30 <user>",305
+18,"Investigate any users with a password change date in the future and correct them. Locking 
+the account, expiring the password, or resetting the password manually may be 
+appropriate.",307
+18,"Set the shell for any accounts returned by the audit script to /usr/sbin/nologin: 
+# usermod -s /usr/sbin/nologin <user> 
+ 
+The following script will automatically set all user shells required to /usr/sbin/nologin 
+and lock the sync, shutdown, and halt users: 
+#!/bin/bash 
+ 
+for user in `awk -F: '($3 < 1000) {print $1 }' /etc/passwd`; do 
+  if [ $user != ""root"" ]; then 
+    usermod -L $user 
+    if [ $user != ""sync"" ] && [ $user != ""shutdown"" ] && [ $user != ""halt"" ]; 
+then 
+      usermod -s /usr/sbin/nologin $user",308
+18,"Run the following command to set the root user default group to GID 0: 
+# usermod -g 0 root 
+ 
+CIS Controls: 
+5 Controlled Use of Administration Privileges 
+Controlled Use of Administration Privileges",310
+18,"Edit the /etc/bash.bashrc, /etc/profile and /etc/profile.d/*.sh files (and the 
+appropriate files for any other shell supported on your system) and add or edit any umask 
+parameters as follows: 
+umask 027",311
+18,"Edit the /etc/bashrc and /etc/profile files (and the appropriate files for any other shell 
+supported on your system) and add or edit any umask parameters as follows: 
+TMOUT=600",313
+18,"Remove entries for any consoles that are not in a physically secure location. 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",315
+18,"Add the following line to the /etc/pam.d/su file: 
+auth required pam_wheel.so 
+ 
+Create a comma separated list of users in the wheel statement in the /etc/group file: 
+wheel:x:10:root,<user list>",316
+18,"Correct any discrepancies found and rerun the audit until output is clean or risk is 
+mitigated or accepted.",319
+18,"Run the following command to set permissions on /etc/passwd: 
+# chown root:root /etc/passwd 
+# chmod 644 /etc/passwd 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",320
+18,"Run the one following commands to set permissions on /etc/shadow: 
+# chown root:shadow /etc/shadow 
+# chmod o-rwx,g-wx /etc/shadow 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",321
+18,"Run the following command to set permissions on /etc/group: 
+# chown root:root /etc/group 
+# chmod 644 /etc/group 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",322
+18,"Run the following commands to set permissions on /etc/gshadow: 
+# chown root:shadow /etc/gshadow 
+# chmod o-rwx,g-rw /etc/gshadow 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",323
+18,"Run the following command to set permissions on /etc/passwd- : 
+# chown root:root /etc/passwd- 
+# chmod u-x,go-wx /etc/passwd- 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",324
+18,"Run the one of the following chown commands as appropriate and the chmod to set 
+permissions on /etc/shadow- : 
+# chown root:root /etc/shadow- 
+# chown root:shadow /etc/shadow- 
+ 
+# chmod o-rwx,g-rw /etc/shadow- 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",325
+18,"Run the following command to set permissions on /etc/group- : 
+# chown root:root /etc/group- 
+# chmod u-x,go-wx /etc/group- 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",326
+18,"Run the one of the following chown commands as appropriate and the chmod to set 
+permissions on /etc/gshadow- : 
+# chown root:root /etc/gshadow- 
+# chown root:shadow /etc/gshadow- 
+ 
+# chmod o-rwx,g-rw /etc/gshadow- 
+ 
+CIS Controls: 
+16.14 Encrypt/Hash All Authentication Files And Monitor Their Access 
+Verify that all authentication files are encrypted or hashed and that these files cannot be 
+accessed without root or administrator privileges. Audit all access to password files in the 
+system.",327
+18,"Removing write access for the ""other"" category (chmod o-w <filename>) is advisable, but 
+always consult relevant vendor documentation to avoid breaking any application 
+dependencies on a given file. 
+CIS Controls: 
+14 Controlled Access Based on the Need to Know 
+Controlled Access Based on the Need to Know",328
+18,"Locate files that are owned by users or groups not listed in the system configuration files, 
+and reset the ownership of these files to some active user on the system as appropriate. 
+CIS Controls: 
+14 Controlled Access Based on the Need to Know 
+Controlled Access Based on the Need to Know",329
+18,"Locate files that are owned by users or groups not listed in the system configuration files, 
+and reset the ownership of these files to some active user on the system as appropriate. 
+CIS Controls: 
+14 Controlled Access Based on the Need to Know 
+Controlled Access Based on the Need to Know",330
+18,"Ensure that no rogue SUID programs have been introduced into the system. Review the 
+files returned by the action in the Audit section and confirm the integrity of these binaries. 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are",331
+18,"Ensure that no rogue SGID programs have been introduced into the system. Review the 
+files returned by the action in the Audit section and confirm the integrity of these binaries. 
+CIS Controls:",333
+18,"If any accounts in the /etc/shadow file do not have a password, run the following command 
+to lock the account until it can be determined why it does not have a password: 
+# passwd -l <username> 
+ 
+Also, check to see if the account is logged in and investigate what it is being used for to 
+determine if it needs to be forced off. 
+CIS Controls:",335
+18,"Remove any legacy '+' entries from /etc/passwd if they exist. 
+CIS Controls: 
+16.9 Configure Account Access Centrally 
+Configure access for all accounts through a centralized point of authentication, for example 
+Active Directory or LDAP. Configure network and security devices for centralized 
+authentication as well.",337
+18,"Remove any legacy '+' entries from /etc/shadow if they exist. 
+CIS Controls: 
+16.9 Configure Account Access Centrally 
+Configure access for all accounts through a centralized point of authentication, for example 
+Active Directory or LDAP. Configure network and security devices for centralized 
+authentication as well.",338
+18,"Remove any legacy '+' entries from /etc/group if they exist. 
+CIS Controls: 
+16.9 Configure Account Access Centrally 
+Configure access for all accounts through a centralized point of authentication, for example 
+Active Directory or LDAP. Configure network and security devices for centralized 
+authentication as well.",339
+18,"Remove any users other than root with UID 0 or assign them a new UID if appropriate. 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",340
+18,"Correct or justify any items discovered in the Audit step. 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",342
+18,"If any users' home directories do not exist, create them and make sure the respective user 
+owns the directory. Users without an assigned home directory should be removed or 
+assigned a home directory as appropriate.",343
+18,"Making global modifications to user home directories without alerting the user community 
+can result in unexpected outages and unhappy users. Therefore, it is recommended that a 
+monitoring policy be established to report user file permissions and determine the action 
+to be taken in accordance with site policy.",345
+18,"Change the ownership of any home directories that are not owned by the defined user to 
+the correct user. 
+CIS Controls: 
+14.4 Protect Information With Access Control Lists 
+All information stored on systems shall be protected with file system, network share, 
+claims, application, or database specific access control lists. These controls will enforce the",346
+18,"Making global modifications to users' files without alerting the user community can result 
+in unexpected outages and unhappy users. Therefore, it is recommended that a monitoring",348
+18,"Making global modifications to users' files without alerting the user community can result 
+in unexpected outages and unhappy users. Therefore, it is recommended that a monitoring 
+policy be established to report user .forward files and determine the action to be taken in 
+accordance with site policy. 
+CIS Controls:",350
+18,"Making global modifications to users' files without alerting the user community can result 
+in unexpected outages and unhappy users. Therefore, it is recommended that a monitoring 
+policy be established to report user .netrc files and determine the action to be taken in 
+accordance with site policy. 
+CIS Controls:",352
+18,"Making global modifications to users' files without alerting the user community can result 
+in unexpected outages and unhappy users. Therefore, it is recommended that a monitoring 
+policy be established to report user .netrc file permissions and determine the action to be 
+taken in accordance with site policy.",355
+18,"Making global modifications to users' files without alerting the user community can result 
+in unexpected outages and unhappy users. Therefore, it is recommended that a monitoring 
+policy be established to report user .rhosts files and determine the action to be taken in 
+accordance with site policy.",356
+18,"Analyze the output of the Audit step above and perform the appropriate action to correct 
+any discrepancies found. 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",358
+18,"Based on the results of the audit script, establish unique UIDs and review all files owned by 
+the shared UIDs to determine which UID they are supposed to belong to. 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",359
+18,"Based on the results of the audit script, establish unique GIDs and review all files owned by 
+the shared GID to determine which group they are supposed to belong to.",360
+18,"Based on the results of the audit script, establish unique user names for the users. File 
+ownerships will automatically reflect the change as long as the users have unique UIDs. 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",362
+18,"Based on the results of the audit script, establish unique names for the user groups. File 
+group ownerships will automatically reflect the change as long as the groups have unique 
+GIDs. 
+CIS Controls: 
+16 Account Monitoring and Control 
+Account Monitoring and Control",363
+18,"Remove all users from the shadow group, and change the primary group of any users with 
+shadow as their primary group. 
+CIS Controls: 
+5.1 Minimize And Sparingly Use Administrative Privileges 
+Minimize administrative privileges and only use administrative accounts when they are 
+required. Implement focused auditing on the use of administrative privileged functions and 
+monitor for anomalous behavior.",364
