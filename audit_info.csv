@@ -69,81 +69,81 @@ tmpfs on /var/tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)",,37
 on /home. 
 # mount | grep /home 
 /dev/xvdf1 on /home type ext4 (rw,nodev,relatime,data=ordered)",,43
-18,"Run the following command and verify that the nodev option is set on /run/shm. 
+19,"Run the following command and verify that the nodev option is set on /run/shm. 
 # mount | grep /run/shm 
 tmpfs on /run/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)",,44
-18,"Run the following command and verify that the nosuid option is set on /run/shm. 
+20,"Run the following command and verify that the nosuid option is set on /run/shm. 
 # mount | grep /run/shm 
 tmpfs on /run/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)",,45
-18,"Run the following command and verify that the noexec option is set on /run/shm. 
+21,"Run the following command and verify that the noexec option is set on /run/shm. 
 # mount | grep /run/shm 
 tmpfs on /run/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)",,46
-18,"Run the following command and verify that the nodev option is set on all removable media 
+21,"Run the following command and verify that the nodev option is set on all removable media 
 partitions. 
 # mount",,47
-18,"Run the following command and verify that the nosuid option is set on all removable media 
+21,"Run the following command and verify that the nosuid option is set on all removable media 
 partitions. 
 # mount",,48
-18,"Run the following command and verify that the noexec option is set on all removable media 
+21,"Run the following command and verify that the noexec option is set on all removable media 
 partitions. 
 # mount",,49
-18,"Run the following command to verify no world writable directories exist without the sticky 
+25,"Run the following command to verify no world writable directories exist without the sticky 
 bit set: 
 # df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev 
 -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null 
  
 No output should be returned.",,50
-18,"Run the following commands to verify no start conditions listed for autofs: 
+26,"Run the following commands to verify no start conditions listed for autofs: 
 # initctl show-config autofs 
 autofs",,51
-18,"Run the following command and verify package repositories are configured correctly: 
+28,"Run the following command and verify package repositories are configured correctly: 
 # apt-cache policy",,53
-18,"Run the following command and verify GPG keys are configured correctly for your package 
+29,"Run the following command and verify GPG keys are configured correctly for your package 
 manager: 
 # apt-key list",,55
-18,"Run the following command and verify AIDE is installed: 
+31,"Run the following command and verify AIDE is installed: 
 # dpkg -s aide",,56
-18,"Run the following commands to determine if there is a cronjob scheduled to run the aide 
+32,"Run the following commands to determine if there is a cronjob scheduled to run the aide 
 check. 
 # crontab -u root -l | grep aide 
 # grep -r aide /etc/cron.* /etc/crontab 
  
 Ensure a cron job in compliance with site policy is returned.",,58
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+34,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other: 
 # stat /boot/grub/grub.cfg 
 Access: (0400/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,60
-18,"Run the following commands and verify output matches: 
+35,"Run the following commands and verify output matches: 
 # grep ""^set superusers"" /boot/grub/grub.cfg 
 set superusers=""<username>"" 
 # grep ""^password"" /boot/grub/grub.cfg 
 password_pbkdf2 <username> <encrypted-password>",,62
-18,"Perform the following to determine if a password is set for the rootuser: 
+36,"Perform the following to determine if a password is set for the rootuser: 
 # grep ^root:[*\!]: /etc/shadow 
  
 No results should be returned.",,64
-18,"Run the following commands and verify output matches: 
+38,"Run the following commands and verify output matches: 
 # grep ""hard core"" /etc/security/limits.conf /etc/security/limits.d/* 
 * hard core 0 
 # sysctl fs.suid_dumpable 
 fs.suid_dumpable = 0 
 # grep ""fs\.suid_dumpable"" /etc/sysctl.conf /etc/sysctl.d/* 
 fs.suid_dumpable = 0",,65
-18,"Run the following command and verify your kernel has identified and activated NX/XD 
+39,"Run the following command and verify your kernel has identified and activated NX/XD 
 protection. 
 # dmesg | grep NX 
 NX (Execute Disable) protection: active",,67
-18,"Run the following command and verify output matches: 
+39,"Run the following command and verify output matches: 
 # sysctl kernel.randomize_va_space 
 kernel.randomize_va_space = 2 
 # grep ""kernel\.randomize_va_space"" /etc/sysctl.conf /etc/sysctl.d/* 
 kernel.randomize_va_space = 2",,69
-18,"Run the following command and verify prelink is not installed: 
+41,"Run the following command and verify prelink is not installed: 
 # dpkg -s prelink",,71
-18,"Run the following command and verify that no linux line has the selinux=0 or enforcing=0 
+42,"Run the following command and verify that no linux line has the selinux=0 or enforcing=0 
 parameters set: 
 # grep ""^\s*linux"" /boot/grub/grub.cfg",,74
-18,"Run the following commands and ensure output matches: 
+44,"Run the following commands and ensure output matches: 
 # grep SELINUX=enforcing /etc/selinux/config 
 SELINUX=enforcing 
  
@@ -151,18 +151,18 @@ SELINUX=enforcing
 SELinux status: enabled 
 Current mode: enforcing 
 Mode from config file: enforcing",,76
-18,"Run the following commands and ensure output matches ""ubuntu"", ""default"" or ""mls"": 
+45,"Run the following commands and ensure output matches ""ubuntu"", ""default"" or ""mls"": 
 # grep SELINUXTYPE= /etc/selinux/config 
 SELINUXTYPE=ubuntu 
  
 # sestatus 
 Policy from config file: ubuntu",,77
-18,"Run the following command and verify not output is produced: 
+46,"Run the following command and verify not output is produced: 
 # ps -eZ | egrep ""initrc"" | egrep -vw ""tr|ps|egrep|bash|awk"" | tr ':' ' ' | 
 awk '{ print $NF }'",,78
-18,"Run the following command and verify that no linux line the apparmor=0 parameter set: 
+46,"Run the following command and verify that no linux line the apparmor=0 parameter set: 
 # grep ""^\s*linux"" /boot/grub/grub.cfg",,80
-18,"Run the following command and verify that profiles are loaded, no profiles are in complain 
+48,"Run the following command and verify that profiles are loaded, no profiles are in complain 
 mode, and no processes are unconfined: 
 # apparmor_status 
 apparmor module is loaded. 
@@ -191,34 +191,34 @@ apparmor module is loaded.
   /usr/sbin/nscd (3979) 
 0 processes are in complain mode. 
 0 processes are unconfined but have a profile defined.",,81
-18,"Run the following commands and verify either SELinux or AppArmor is installed: 
+49,"Run the following commands and verify either SELinux or AppArmor is installed: 
 # dpkg -s selinux 
 # dpkg -s apparmor",,83
-18,"Run the following command and verify that the contents match site policy: 
+50,"Run the following command and verify that the contents match site policy: 
 # cat /etc/motd 
  
 Run the following command and verify no results are returned: 
 # egrep '(\\v|\\r|\\m|\\s)' /etc/motd",,85
-18,"Run the following command and verify that the contents match site policy: 
+50,"Run the following command and verify that the contents match site policy: 
 # cat /etc/issue 
  
 Run the following command and verify no results are returned: 
 # egrep '(\\v|\\r|\\m|\\s)' /etc/issue",,87
-18,"Run the following command and verify that the contents match site policy: 
+50,"Run the following command and verify that the contents match site policy: 
 # cat /etc/issue.net 
  
 Run the following command and verify no results are returned: 
 # egrep '(\\v|\\r|\\m|\\s)' /etc/issue.net",,89
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
+52,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
 # stat /etc/motd 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,91
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
+53,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
 # stat /etc/issue 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,92
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
+54,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
 # stat /etc/issue.net 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,93
-18,"If GDM is installed on the system verify that /etc/dconf/profile/gdm exists and contains 
+55,"If GDM is installed on the system verify that /etc/dconf/profile/gdm exists and contains 
 the following: 
 user-db:user 
 system-db:gdm 
@@ -231,44 +231,44 @@ banner-message-enable=true
 banner-message-text='<banner message>' 
  
 This is typically configured in /etc/dconf/db/gdm.d/01-banner-message.",,94
-18,"Run the following command and verify there are no updates or patches to install: 
+55,"Run the following command and verify there are no updates or patches to install: 
 # apt-get -s upgrade",,96
-18,"Verify the chargen service is not enabled. Run the following command and verify results 
+57,"Verify the chargen service is not enabled. Run the following command and verify results 
 are as indicated: 
 grep -R ""^chargen"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all chargen services have 
 disable = yes set.",,98
-18,"Verify the daytime service is not enabled. Run the following command and verify results 
+58,"Verify the daytime service is not enabled. Run the following command and verify results 
 are as indicated: 
 grep -R ""^daytime"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all daytime services have 
 disable = yes set.",,100
-18,"Verify the discard service is not enabled. Run the following command and verify results 
+59,"Verify the discard service is not enabled. Run the following command and verify results 
 are as indicated: 
 grep -R ""^discard"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all discard services have 
 disable = yes set.",,101
-18,"Verify the echo service is not enabled. Run the following command and verify results are as 
+60,"Verify the echo service is not enabled. Run the following command and verify results are as 
 indicated: 
 grep -R ""^echo"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all echo services have disable = 
 yes set.",,102
-18,"Verify the time service is not enabled. Run the following command and verify results are as 
+61,"Verify the time service is not enabled. Run the following command and verify results are as 
 indicated: 
 grep -R ""^time"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all time services have disable = 
 yes set.",,103
-18,"Verify the rsh services are not enabled. Run the following commands and verify results are 
+61,"Verify the rsh services are not enabled. Run the following commands and verify results are 
 as indicated: 
 grep -R ""^shell"" /etc/inetd.* 
 grep -R ""^login"" /etc/inetd.*  
@@ -277,7 +277,7 @@ grep -R ""^exec"" /etc/inetd.*
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all rsh, rlogin, and rexec 
 services have disable = yes set.",,104
-18,"Verify the talk service is not enabled. Run the following commands and verify results are 
+62,"Verify the talk service is not enabled. Run the following commands and verify results are 
 as indicated: 
 grep -R ""^talk"" /etc/inetd.* 
 grep -R ""^ntalk"" /etc/inetd.*  
@@ -285,33 +285,33 @@ grep -R ""^ntalk"" /etc/inetd.*
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all talk services have disable = 
 yes set.",,106
-18,"Verify the telnet service is not enabled. Run the following command and verify results are 
+63,"Verify the telnet service is not enabled. Run the following command and verify results are 
 as indicated: 
 grep -R ""^telnet"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all telnet services have disable 
 = yes set.",,107
-18,"Verify the tftp service is not enabled. Run the following command and verify results are as 
+64,"Verify the tftp service is not enabled. Run the following command and verify results are as 
 indicated: 
 grep -R ""^tftp"" /etc/inetd.* 
  
 No results should be returned 
 check /etc/xinetd.conf and /etc/xinetd.d/* and verify all tftp services have disable = 
 yes set.",,109
-18,"Run the following commands to verify no start conditions listed for xinetd: 
+65,"Run the following commands to verify no start conditions listed for xinetd: 
 # initctl show-config xinetd 
 xinetd",,110
-18,"Run the following command and verify openbsd-inetd is not installed: 
+66,"Run the following command and verify openbsd-inetd is not installed: 
 dpkg -s openbsd-inetd",,111
-18,"On physical systems or virtual systems where host based time synchronization is not 
+68,"On physical systems or virtual systems where host based time synchronization is not 
 available run the following commands and verify either NTP or chrony is installed: 
 # dpkg -s ntp 
 # dpkg -s chrony 
  
 On virtual systems where host based time synchronization is available consult your 
 virtualization software documentation and verify that host based synchronization is in use.",,112
-18,"Run the following command and verify output matches: 
+69,"Run the following command and verify output matches: 
 # grep ""^restrict"" /etc/ntp.conf 
 restrict -4 default kod nomodify notrap nopeer noquery 
 restrict -6 default kod nomodify notrap nopeer noquery 
@@ -326,86 +326,86 @@ Multiple servers may be configured.
 Verify that ntp is configured to run as the ntp user by running the following command: 
 # grep ""RUNASUSER=ntp"" /etc/init.d/ntp 
 RUNASUSER=ntp",,114
-18,"Run the following command and verify remote server is configured properly: 
+70,"Run the following command and verify remote server is configured properly: 
 # grep ""^(server|pool)"" /etc/chrony/chrony.conf 
 server <remote-server> 
  
 Multiple servers may be configured.",,116
-18,"Run the following command and verify X Windows System is not installed: 
+71,"Run the following command and verify X Windows System is not installed: 
 dpkg -l xserver-xorg*",,117
-18,"Run the following commands to verify no start conditions listed for avahi-daemon: 
+72,"Run the following commands to verify no start conditions listed for avahi-daemon: 
 # initctl show-config avahi-daemon 
 avahi-daemon",,118
-18,"Run the following commands to verify no start conditions listed for cups: 
+73,"Run the following commands to verify no start conditions listed for cups: 
 # initctl show-config cups 
 cups",,119
-18,"Ensure no start conditions listed for isc-dhcp-serveror isc-dhcp-server6: 
+74,"Ensure no start conditions listed for isc-dhcp-serveror isc-dhcp-server6: 
 # initctl show-config isc-dhcp-server 
 isc-dhcp-server 
 # initctl show-config isc-dhcp-server6 
 isc-dhcp-server6",,121
-18,"Run the following to ensure no start links for slapd exist in /etc/rc*.d: 
+75,"Run the following to ensure no start links for slapd exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*slapd 
  
 No results should be returned.",,122
-18,"Run the following to ensure no start links for nfs-kernel-server exist in /etc/rc*.d: 
+76,"Run the following to ensure no start links for nfs-kernel-server exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*nfs-kernel-server 
  
 No results should be returned. 
 Run the following commands to verify no start conditions listed for rpcbind: 
 # initctl show-config rpcbind 
 rpcbind",,123
-18,"Run the following to ensure no start links for bind9 exist in /etc/rc*.d: 
+77,"Run the following to ensure no start links for bind9 exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*bind9 
  
 No results should be returned.",,125
-18,"Run the following commands to verify no start conditions listed for vsftpd: 
+78,"Run the following commands to verify no start conditions listed for vsftpd: 
 # initctl show-config vsftpd 
 vsftpd",,126
-18,"Run the following to ensure no start links for apache2 exist in /etc/rc*.d: 
+79,"Run the following to ensure no start links for apache2 exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*apache2 
  
 No results should be returned.",,127
-18,"Run the following commands to verify no start conditions listed for dovecot: 
+80,"Run the following commands to verify no start conditions listed for dovecot: 
 # initctl show-config dovecot 
 dovecot",,128
-18,"Ensure no start conditions listed for smbd: 
+81,"Ensure no start conditions listed for smbd: 
 # initctl show-config smbd 
 smbd",,129
-18,"Ensure no start conditions listed for squid3: 
+82,"Ensure no start conditions listed for squid3: 
 # initctl show-config squid3 
 squid3",,130
-18,"Run the following to ensure no start links for snmpd exist in /etc/rc*.d: 
+83,"Run the following to ensure no start links for snmpd exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*snmpd 
  
 No results should be returned.",,131
-18,"Run the following command and verify that the MTA is not listening on any non-loopback 
+83,"Run the following command and verify that the MTA is not listening on any non-loopback 
 address ( 127.0.0.1 or ::1 ): 
 # netstat -an | grep LIST | grep "":25[[:space:]]"" 
 tcp 0 0 127.0.0.1:25 0.0.0.0:* LISTEN",,133
-18,"Run the following command to verify that the rsync service is not enabled: 
+84,"Run the following command to verify that the rsync service is not enabled: 
 # grep ^RSYNC_ENABLE /etc/default/rsync 
 RSYNC_ENABLE=false",,135
-18,"Run the following commands to verify no start conditions listed for ypserv: 
+85,"Run the following commands to verify no start conditions listed for ypserv: 
 # initctl show-config ypserv 
 ypserv",,136
-18,"Run the following command and verify nis is not installed: 
+87,"Run the following command and verify nis is not installed: 
 dpkg -s nis",,137
-18,"Run the following commands and verify rsh is not installed: 
+88,"Run the following commands and verify rsh is not installed: 
 dpkg -s rsh-client 
 dpkg -s rsh-redone-client",,139
-18,"Run the following command and verify talk is not installed: 
+89,"Run the following command and verify talk is not installed: 
 dpkg -s talk",,141
-18,"Run the following command and verify telnet is not installed: 
+90,"Run the following command and verify telnet is not installed: 
 # dpkg -s telnet",,142
-18,"Run the following command and verify ldap-utils is not installed: 
+91,"Run the following command and verify ldap-utils is not installed: 
 # dpkg -s ldap-utils",,144
-18,"Run the following command and verify output matches: 
+93,"Run the following command and verify output matches: 
 # sysctl net.ipv4.ip_forward 
 net.ipv4.ip_forward = 0 
 # grep ""net\.ipv4\.ip_forward"" /etc/sysctl.conf /etc/sysctl.d/* 
 net.ipv4.ip_forward = 0",,146
-18,"Run the following commands and verify output matches: 
+94,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.conf.all.send_redirects 
 net.ipv4.conf.all.send_redirects = 0 
 # sysctl net.ipv4.conf.default.send_redirects 
@@ -416,13 +416,13 @@ net.ipv4.conf.all.send_redirects = 0
 # grep ""net\.ipv4\.conf\.default\.send_redirects"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv4.conf.default.send_redirects= 0",,148
-18,"Run the following commands and verify output matches: 
+96,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.conf.all.accept_source_route 
 net.ipv4.conf.all.accept_source_route = 0 
 # sysctl net.ipv4.conf.default.accept_source_route 
 net.ipv4.conf.default.accept_source_route = 0 
 # grep ""net\.ipv4\.conf\.all\.accept_source_route"" /etc/sysctl.conf",,150
-18,"Run the following commands and verify output matches: 
+97,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.conf.all.accept_redirects 
 net.ipv4.conf.all.accept_redirects = 0 
 # sysctl net.ipv4.conf.default.accept_redirects 
@@ -433,7 +433,7 @@ net.ipv4.conf.all.accept_redirects= 0
 # grep ""net\.ipv4\.conf\.default\.accept_redirects"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv4.conf.default.accept_redirects= 0",,152
-18,"Run the following commands and verify output matches: 
+98,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.conf.all.secure_redirects 
 net.ipv4.conf.all.secure_redirects = 0 
 # sysctl net.ipv4.conf.default.secure_redirects 
@@ -444,7 +444,7 @@ net.ipv4.conf.all.secure_redirects= 0
 # grep ""net\.ipv4\.conf\.default\.secure_redirects"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv4.conf.default.secure_redirects= 0",,154
-18,"Run the following commands and verify output matches: 
+99,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.conf.all.log_martians 
 net.ipv4.conf.all.log_martians = 1 
 # sysctl net.ipv4.conf.default.log_martians 
@@ -454,19 +454,19 @@ net.ipv4.conf.all.log_martians = 1
 # grep ""net\.ipv4\.conf\.default\.log_martians"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv4.conf.default.log_martians = 1",,156
-18,"Run the following commands and verify output matches: 
+100,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.icmp_echo_ignore_broadcasts 
 net.ipv4.icmp_echo_ignore_broadcasts = 1 
 # grep ""net\.ipv4\.icmp_echo_ignore_broadcasts"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv4.icmp_echo_ignore_broadcasts = 1",,158
-18,"Run the following commands and verify output matches: 
+101,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.icmp_ignore_bogus_error_responses 
 net.ipv4.icmp_ignore_bogus_error_responses = 1 
 # grep ""net\.ipv4\.icmp_ignore_bogus_error_responses"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv4.icmp_ignore_bogus_error_responses = 1",,160
-18,"Run the following commands and verify output matches: 
+102,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.conf.all.rp_filter 
 net.ipv4.conf.all.rp_filter = 1 
 # sysctl net.ipv4.conf.default.rp_filter 
@@ -475,12 +475,12 @@ net.ipv4.conf.default.rp_filter = 1
 net.ipv4.conf.all.rp_filter = 1 
 # grep ""net\.ipv4\.conf\.default\.rp_filter"" /etc/sysctl.conf /etc/sysctl.d/* 
 net.ipv4.conf.default.rp_filter = 1",,162
-18,"Run the following commands and verify output matches: 
+103,"Run the following commands and verify output matches: 
 # sysctl net.ipv4.tcp_syncookies 
 net.ipv4.tcp_syncookies = 1 
 # grep ""net\.ipv4\.tcp_syncookies"" /etc/sysctl.conf /etc/sysctl.d/* 
 net.ipv4.tcp_syncookies = 1",,164
-18,"Run the following commands and verify output matches: 
+105,"Run the following commands and verify output matches: 
 # sysctl net.ipv6.conf.all.accept_ra 
 net.ipv6.conf.all.accept_ra = 0 
 # sysctl net.ipv6.conf.default.accept_ra 
@@ -489,7 +489,7 @@ net.ipv6.conf.default.accept_ra = 0
 net.ipv6.conf.all.accept_ra = 0 
 # grep ""net\.ipv6\.conf\.default\.accept_ra"" /etc/sysctl.conf /etc/sysctl.d/* 
 net.ipv6.conf.default.accept_ra = 0",,166
-18,"Run the following commands and verify output matches: 
+106,"Run the following commands and verify output matches: 
 # sysctl net.ipv6.conf.all.accept_redirects 
 net.ipv6.conf.all.accept_redirect = 0 
 # sysctl net.ipv6.conf.default.accept_redirects 
@@ -500,51 +500,51 @@ net.ipv6.conf.all.accept_redirect = 0
 # grep ""net\.ipv6\.conf\.default\.accept_redirect"" /etc/sysctl.conf 
 /etc/sysctl.d/* 
 net.ipv6.conf.default.accept_redirect = 0",,168
-18,"Run the following command and verify that each linux line has the 'ipv6.disable=1' 
+107,"Run the following command and verify that each linux line has the 'ipv6.disable=1' 
 parameter set: 
 # grep ""^\s*linux"" /boot/grub/grub.cfg",,170
-18,"Run the following command and verify TCP Wrappers is installed: 
+109,"Run the following command and verify TCP Wrappers is installed: 
 dpkg -s tcpd",,171
-18,"Run the following command and verify the contents of the /etc/hosts.allow file: 
+110,"Run the following command and verify the contents of the /etc/hosts.allow file: 
 # cat /etc/hosts.allow",,173
-18,"Run the following command and verify the contents of the /etc/hosts.denyfile: 
+111,"Run the following command and verify the contents of the /etc/hosts.denyfile: 
 # cat /etc/hosts.deny 
 ALL: ALL",,174
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
+112,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
 # stat /etc/hosts.allow 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,175
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644 : 
+113,"Run the following command and verify Uid and Gid are both 0/root and Access is 644 : 
 # stat /etc/hosts.deny 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,176
-18,"Run the following commands and verify the output is as indicated: 
+115,"Run the following commands and verify the output is as indicated: 
 # modprobe -n -v dccp 
 install /bin/true 
 # lsmod | grep dccp 
 <No output>",,177
-18,"Run the following commands and verify the output is as indicated: 
+116,"Run the following commands and verify the output is as indicated: 
 # modprobe -n -v sctp 
 install /bin/true 
 # lsmod | grep sctp 
 <No output>",,179
-18,"Run the following commands and verify the output is as indicated: 
+117,"Run the following commands and verify the output is as indicated: 
 # modprobe -n -v rds 
 install /bin/true 
 # lsmod | grep rds 
 <No output>",,180
-18,"Run the following commands and verify the output is as indicated: 
+118,"Run the following commands and verify the output is as indicated: 
 # modprobe -n -v tipc 
 install /bin/true 
 # lsmod | grep tipc 
 <No output>",,181
-18,"Run the following command and verify iptables is installed: 
+120,"Run the following command and verify iptables is installed: 
 # dpkg -s iptables",,183
-18,"Run the following command and verify that the policy for the INPUT, OUTPUT, and FORWARD 
+121,"Run the following command and verify that the policy for the INPUT, OUTPUT, and FORWARD 
 chains is DROP or REJECT: 
 # iptables -L 
 Chain INPUT (policy DROP) 
 Chain FORWARD (policy DROP) 
 Chain OUTPUT (policy DROP)",,184
-18,"Run the following commands and verify output includes the listed rules in order (packet 
+122,"Run the following commands and verify output includes the listed rules in order (packet 
 and byte counts may differ): 
 # iptables -L INPUT -v -n 
 Chain INPUT (policy DROP 0 packets, 0 bytes) 
@@ -558,10 +558,10 @@ Chain OUTPUT (policy DROP 0 packets, 0 bytes)
 pkts bytes target     prot opt in     out     source               
 destination 
    0     0 ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0",,186
-18,"Run the following command and verify all rules for new outbound, and established 
+122,"Run the following command and verify all rules for new outbound, and established 
 connections match site policy: 
 # iptables -L -v -n",,188
-18,"Run the following command to determine open ports: 
+123,"Run the following command to determine open ports: 
 # netstat -ln 
 Active Internet connections (only servers) 
 Proto Recv-Q Send-Q Local Address           Foreign Address         State 
@@ -580,33 +580,33 @@ tcp dpt:22 state NEW
 Verify all open ports listening on non-localhost addresses have at least one firewall rule. 
 The last line identified by the ""tcp dpt:22 state NEW"" identifies it as a firewall rule for new 
 connections on tcp port 22.",,190
-18,"Run the following command to determine wireless interfaces on the system: 
+124,"Run the following command to determine wireless interfaces on the system: 
 # iwconfig 
  
 Run the following command and verify wireless interfaces are active: 
 # ip link show up",,192
-18,"Run the following command and ensure output is in compliance with site policy: 
+126,"Run the following command and ensure output is in compliance with site policy: 
 # grep max_log_file /etc/audit/auditd.conf 
 max_log_file = <MB>",,195
-18,"Run the following commands and verify output matches: 
+127,"Run the following commands and verify output matches: 
 # grep space_left_action /etc/audit/auditd.conf 
 space_left_action = email 
 # grep action_mail_acct /etc/audit/auditd.conf 
 action_mail_acct = root 
 # grep admin_space_left_action /etc/audit/auditd.conf 
 admin_space_left_action = halt",,197
-18,"Run the following command and verify output matches: 
+128,"Run the following command and verify output matches: 
 # grep max_log_file_action /etc/audit/auditd.conf 
 max_log_file_action = keep_logs",,198
-18,"Run the following to ensure proper start links for auditd exist in /etc/rc*.d: 
+129,"Run the following to ensure proper start links for auditd exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*auditd 
 /etc/rc2.d/S37auditd  /etc/rc3.d/S37auditd  /etc/rc4.d/S37auditd  
 /etc/rc5.d/S37auditd 
  
 Start links should exist for run levels 2, 3, 4, and 5.",,199
-18,"Run the following command and verify that each linux line has the audit=1 parameter set: 
+129,"Run the following command and verify that each linux line has the audit=1 parameter set: 
 # grep ""^\s*linux"" /boot/grub/grub.cfg",,200
-18,"On a 32 bit system run the following commands: 
+129,"On a 32 bit system run the following commands: 
 # grep time-change /etc/audit/audit.rules 
 # auditctl -l | grep time-change 
  
@@ -621,7 +621,7 @@ On a 64 bit system run the following commands:
 # auditctl -l | grep time-change 
  
 Verify output of both matches:",,202
-18,"Run the following commands: 
+129,"Run the following commands: 
 # grep identity /etc/audit/audit.rules 
 # auditctl -l | grep identity 
  
@@ -631,12 +631,12 @@ Verify output of both matches:
 -w /etc/gshadow -p wa -k identity 
 -w /etc/shadow -p wa -k identity 
 -w /etc/security/opasswd -p wa -k identity",,204
-18,"On a 32 bit system run the following commands: 
+129,"On a 32 bit system run the following commands: 
 # grep system-locale /etc/audit/audit.rules 
 # auditctl -l | grep system-locale 
  
 Verify output of both matches:",,206
-18,"On systems using SELinux run the following commands: 
+129,"On systems using SELinux run the following commands: 
 # grep MAC-policy /etc/audit/audit.rules 
 # auditctl -l | grep MAC-policy 
  
@@ -651,7 +651,7 @@ On systems using AppArmor run the following commands:
 Verify output of both matches: 
 -w /etc/apparmor/ -p wa -k MAC-policy 
 -w /etc/apparmor.d/ -p wa -k MAC-policy",,209
-18,"Run the following commands: 
+131,"Run the following commands: 
 # grep logins /etc/audit/audit.rules 
 # auditctl -l | grep logins 
  
@@ -659,7 +659,7 @@ Verify output of both includes:
 -w /var/log/faillog -p wa -k logins 
 -w /var/log/lastlog -p wa -k logins 
 -w /var/log/tallylog -p wa -k logins",,211
-18,"Run the following commands: 
+132,"Run the following commands: 
 # grep session /etc/audit/audit.rules 
 # auditctl -l | grep session 
  
@@ -673,7 +673,7 @@ Run the following commands:
 Verify output of both matches: 
 -w /var/log/wtmp -p wa -k logins 
 -w /var/log/btmp -p wa -k logins",,213
-18,"On a 32 bit system run the following commands: 
+132,"On a 32 bit system run the following commands: 
 # grep perm_mod /etc/audit/audit.rules 
 # auditctl -l | grep perm_mod 
  
@@ -687,7 +687,7 @@ removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295
 -k perm_mod 
  
 On a 64 bit system run the following commands:",,215
-18,"On a 32 bit system run the following commands: 
+132,"On a 32 bit system run the following commands: 
 # grep access /etc/audit/audit.rules 
 # auditctl -l | grep access 
  
@@ -702,7 +702,7 @@ On a 64 bit system run the following commands:
 # auditctl -l | grep access 
  
 Verify output of both matches:",,218
-18,"Run the following command replacing <partition> with a list of partitions where 
+132,"Run the following command replacing <partition> with a list of partitions where 
 programs can be executed from on your system: 
 # find <partition> -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk 
 '{print \ 
@@ -711,7 +711,7 @@ programs can be executed from on your system:
  
 Verify all resulting lines are in the /etc/audit/audit.rules file and the output of auditctl 
 -l.",,220
-18,"On a 32 bit system run the following commands: 
+133,"On a 32 bit system run the following commands: 
 # grep mounts /etc/audit/audit.rules 
 # auditctl -l | grep mounts 
  
@@ -722,7 +722,7 @@ mounts
 On a 64 bit system run the following commands: 
 # grep mounts /etc/audit/audit.rules 
 # auditctl -l | grep mounts",,222
-18,"On a 32 bit system run the following commands: 
+133,"On a 32 bit system run the following commands: 
 # grep delete /etc/audit/audit.rules 
 # auditctl -l | grep delete 
  
@@ -739,20 +739,20 @@ Verify output of both matches:
 auid>=1000 -F auid!=4294967295 -k delete 
 -a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F 
 auid>=1000 -F auid!=4294967295 -k delete",,224
-18,"Run the following commands: 
+133,"Run the following commands: 
 # grep scope /etc/audit/audit.rules 
 # auditctl -l | grep scope 
  
 Verify output of both matches: 
 -w /etc/sudoers -p wa -k scope 
 -w /etc/sudoers.d/ -p wa -k scope",,226
-18,"Run the following commands: 
+133,"Run the following commands: 
 # grep actions /etc/audit/audit.rules 
 # auditctl -l | grep actions 
  
 Verify output of both matches: 
 -w /var/log/sudo.log -p wa -k actions",,228
-18,"On a 32 bit system run the following commands: 
+135,"On a 32 bit system run the following commands: 
 # grep modules /etc/audit/audit.rules 
 # auditctl -l | grep modules 
  
@@ -765,92 +765,92 @@ Verify output of both matches:
 On a 64 bit system run the following commands: 
 # grep modules /etc/audit/audit.rules 
 # auditctl -l | grep modules",,230
-18,"Run the following command and verify output matches: 
+136,"Run the following command and verify output matches: 
 # grep ""^\s*[^#]"" /etc/audit/audit.rules | tail -1 
 -e 2",,232
-18,"Verify that the rsyslog service is active: 
+138,"Verify that the rsyslog service is active: 
 # initctl show-config rsyslog 
 rsyslog 
  start on filesystem 
  stop on runlevel [06]",,234
-18,"Review the contents of the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files to ensure 
+139,"Review the contents of the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files to ensure 
 appropriate logging is set. In addition, run the following command and verify that the log 
 files are logging information: 
 # ls -l /var/log/",,236
-18,"Run the following command and verify that $FileCreateMode is 0640 or more restrictive: 
+140,"Run the following command and verify that $FileCreateMode is 0640 or more restrictive: 
 # grep ^\$FileCreateMode /etc/rsyslog.conf /etc/rsyslog.d/*.conf",,238
-18,"Review the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files and verify that logs are 
+140,"Review the /etc/rsyslog.conf and /etc/rsyslog.d/*.conf files and verify that logs are 
 sent to a central host (where loghost.example.com is the name of your central log host): 
 # grep ""^*.*[^I][^I]*@"" /etc/rsyslog.conf /etc/rsyslog.d/*.conf 
 *.* @@loghost.example.com",,240
-18,"Run the following commands and verify the resulting lines are uncommented on 
+140,"Run the following commands and verify the resulting lines are uncommented on 
 designated log hosts and commented or removed on all others: 
 # grep '$ModLoad imtcp' /etc/rsyslog.conf /etc/rsyslog.d/*.conf 
 $ModLoad imtcp 
 # grep '$InputTCPServerRun' /etc/rsyslog.conf /etc/rsyslog.d/*.conf 
 $InputTCPServerRun 514",,242
-18,"Run the following to ensure proper start links for syslog-ng exist in /etc/rc*.d: 
+142,"Run the following to ensure proper start links for syslog-ng exist in /etc/rc*.d: 
 # ls /etc/rc*.d/S*syslog-ng 
 /etc/rc2.d/S10syslog-ng  /etc/rc3.d/S10syslog-ng /etc/rc4.d/S10syslog-ng 
 /etc/rc5.d/S10syslog-ng 
  
 Start links should exist for run levels 2, 3, 4, and 5.",,244
-18,"Review the contents of the /etc/syslog-ng/syslog-ng.conf file to ensure appropriate 
+143,"Review the contents of the /etc/syslog-ng/syslog-ng.conf file to ensure appropriate 
 logging is set. In addition, run the following command and ensure that the log files are 
 logging information: 
 # ls -l /var/log/",,246
-18,"Run the following command and verify the perm option is 0640 or more restrictive: 
+144,"Run the following command and verify the perm option is 0640 or more restrictive: 
 # grep ^options /etc/syslog-ng/syslog-ng.conf 
 options { chain_hostnames(off); flush_lines(0); perm(0640); stats_freq(3600); 
 threaded(yes); };",,248
-18,"Review the /etc/syslog-ng/syslog-ng.conf file and verify that logs are sent to a central 
+144,"Review the /etc/syslog-ng/syslog-ng.conf file and verify that logs are sent to a central 
 host (where logfile.example.com is the name of your central log host): 
 destination logserver { tcp(""logfile.example.com"" port(514)); }; 
 log { source(src); destination(logserver); };",,249
-18,"Review the /etc/syslog-ng/syslog-ng.conf file and verify the following lines are configured 
+144,"Review the /etc/syslog-ng/syslog-ng.conf file and verify the following lines are configured 
 appropriately on designated log hosts: 
 source net{ tcp(); }; 
 destination remote { file(""/var/log/remote/${FULLHOST}-log""); }; 
 log { source(net); destination(remote); };",,251
-18,"Verify either rsyslog or syslog-ng is installed. Depending on the package management in 
+145,"Verify either rsyslog or syslog-ng is installed. Depending on the package management in 
 use one of the following command groups may provide the needed information: 
 # dpkg -s rsyslog 
 # dpkg -s syslog-ng",,253
-18,"Run the following command and verify that other has no permissions on any files and 
+146,"Run the following command and verify that other has no permissions on any files and 
 group does not have write or execute permissions on any files: 
 # find /var/log -type f -ls",,255
-18,"Review /etc/logrotate.conf and /etc/logrotate.d/* and verify logs are rotated 
+147,"Review /etc/logrotate.conf and /etc/logrotate.d/* and verify logs are rotated 
 according to site policy.",,256
-18,"Ensure proper start conditions listed for cron: 
+149,"Ensure proper start conditions listed for cron: 
 # /sbin/initctl show-config cron 
 cron 
  start on runlevel [2345] 
  stop on runlevel [!2345]",,258
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+150,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other: 
 # stat /etc/crontab 
 Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,259
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+150,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other : 
 # stat /etc/cron.hourly 
 Access: (0700/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,260
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+151,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other : 
 # stat /etc/cron.daily 
 Access: (0700/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,262
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+152,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other : 
 # stat /etc/cron.weekly 
 Access: (0700/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,264
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+153,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other : 
 # stat /etc/cron.monthly 
 Access: (0700/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,266
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+154,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other : 
 # stat /etc/cron.d 
 Access: (0700/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,268
-18,"Run the following commands and ensure /etc/cron.deny and /etc/at.deny do not exist: 
+155,"Run the following commands and ensure /etc/cron.deny and /etc/at.deny do not exist: 
 # stat /etc/cron.deny 
 stat: cannot stat `/etc/cron.deny': No such file or directory 
 # stat /etc/at.deny 
@@ -862,53 +862,53 @@ grant permissions to group or other for both /etc/cron.allow and /etc/at.allow:
 Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root) 
 # stat /etc/at.allow 
 Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,270
-18,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
+156,"Run the following command and verify Uid and Gid are both 0/root and Access does not 
 grant permissions to group or other: 
 # stat /etc/ssh/sshd_config 
 Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,272
-18,"Run the following command and verify that output matches: 
+158,"Run the following command and verify that output matches: 
 # grep ""^Protocol"" /etc/ssh/sshd_config 
 Protocol 2",,274
-18,"Run the following command and verify that output matches: 
+159,"Run the following command and verify that output matches: 
 # grep ""^LogLevel"" /etc/ssh/sshd_config 
 LogLevel INFO",,275
-18,"Run the following command and verify that output matches: 
+160,"Run the following command and verify that output matches: 
 # grep ""^X11Forwarding"" /etc/ssh/sshd_config 
 X11Forwarding no",,276
-18,"Run the following command and verify that output MaxAuthTries is 4 or less: 
+161,"Run the following command and verify that output MaxAuthTries is 4 or less: 
 # grep ""^MaxAuthTries"" /etc/ssh/sshd_config 
 MaxAuthTries 4",,277
-18,"Run the following command and verify that output matches: 
+162,"Run the following command and verify that output matches: 
 # grep ""^IgnoreRhosts"" /etc/ssh/sshd_config 
 IgnoreRhosts yes",,278
-18,"Run the following command and verify that output matches: 
+163,"Run the following command and verify that output matches: 
 # grep ""^HostbasedAuthentication"" /etc/ssh/sshd_config 
 HostbasedAuthentication no",,279
-18,"Run the following command and verify that output matches: 
+164,"Run the following command and verify that output matches: 
 # grep ""^PermitRootLogin"" /etc/ssh/sshd_config 
 PermitRootLogin no",,280
-18,"Run the following command and verify that output matches: 
+165,"Run the following command and verify that output matches: 
 # grep ""^PermitEmptyPasswords"" /etc/ssh/sshd_config 
 PermitEmptyPasswords no",,281
-18,"Run the following command and verify that output matches: 
+166,"Run the following command and verify that output matches: 
 # grep PermitUserEnvironment /etc/ssh/sshd_config 
 PermitUserEnvironment no",,282
-18,"Run the following command and verify that output does not contain any unlisted MAC 
+167,"Run the following command and verify that output does not contain any unlisted MAC 
 algorithms: 
 # grep ""MACs"" /etc/ssh/sshd_config 
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-
 etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com,curve25519-
 sha256@libssh.org,diffie-hellman-group-exchange-sha256",,283
-18,"Run the following commands and verify ClientAliveInterval is between 1 and 300 and 
+168,"Run the following commands and verify ClientAliveInterval is between 1 and 300 and 
 ClientAliveCountMax is 3 or less: 
 # grep ""^ClientAliveInterval"" /etc/ssh/sshd_config 
 ClientAliveInterval 300 
 # grep ""^ClientAliveCountMax"" /etc/ssh/sshd_config 
 ClientAliveCountMax 0",,285
-18,"Run the following command and verify that output LoginGraceTime is between 1 and 60: 
+168,"Run the following command and verify that output LoginGraceTime is between 1 and 60: 
 # grep ""^LoginGraceTime"" /etc/ssh/sshd_config 
 LoginGraceTime 60",,287
-18,"Run the following commands and verify that output matches for at least one: 
+169,"Run the following commands and verify that output matches for at least one: 
 # grep ""^AllowUsers"" /etc/ssh/sshd_config 
 AllowUsers <userlist> 
  
@@ -920,21 +920,21 @@ DenyUsers <userlist>
  
 # grep ""^DenyGroups"" /etc/ssh/sshd_config 
 DenyGroups <grouplist>",,289
-18,"Run the following command and verify that output matches: 
+170,"Run the following command and verify that output matches: 
 # grep ""^Banner"" /etc/ssh/sshd_config 
 Banner /etc/issue.net",,290
-18,,,291
-18,"Perform the following to determine the current settings for user lockout. 
+172,,,291
+172,"Perform the following to determine the current settings for user lockout. 
 # grep ""pam_tally2"" /etc/pam.d/common-auth 
 auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900",,294
-18,"Run the following commands and ensure the remember option is '5' or more and included in 
+172,"Run the following commands and ensure the remember option is '5' or more and included in 
 all results: 
 # egrep '^password\s+required\s+pam_pwhistory.so' /etc/pam.d/common-password 
 password required pam_pwhistory.so remember=5",,296
-18,"Run the following commands and ensure the sha512 option is included in all results: 
+173,"Run the following commands and ensure the sha512 option is included in all results: 
 # egrep '^password\s+\S+\s+pam_unix.so' /etc/pam.d/common-password 
 password sufficient pam_unix.so sha512",,297
-18,"Run the following command and verify PASS_MAX_DAYS conforms to site policy (no more 
+175,"Run the following command and verify PASS_MAX_DAYS conforms to site policy (no more 
 than 365 days): 
 # grep PASS_MAX_DAYS /etc/login.defs 
 PASS_MAX_DAYS 90 
@@ -945,7 +945,7 @@ policy (no more than 365 days):
 <list of users> 
 # chage --list <user> 
 Maximum number of days between password change          : 90",,299
-18,"Run the following command and verify PASS_MIN_DAYS is 7 or more: 
+175,"Run the following command and verify PASS_MIN_DAYS is 7 or more: 
 # grep PASS_MIN_DAYS /etc/login.defs 
 PASS_MIN_DAYS 7 
  
@@ -955,7 +955,7 @@ Verify all users with a password have their minimum days between password change
 <list of users> 
 # chage --list <user> 
 Minimum number of days between password change          : 7",,301
-18,"Run the following command and verify PASS_WARN_AGE is 7 or more: 
+176,"Run the following command and verify PASS_WARN_AGE is 7 or more: 
 # grep PASS_WARN_AGE /etc/login.defs 
 PASS_WARN_AGE 7 
  
@@ -965,7 +965,7 @@ expires set to 7 or more:
 <list of users> 
 # chage --list <user> 
 Number of days of warning before password expires       : 7",,303
-18,"Run the following command and verify INACTIVE is 30 or less: 
+177,"Run the following command and verify INACTIVE is 30 or less: 
 # useradd -D | grep INACTIVE 
 INACTIVE=30 
  
@@ -975,70 +975,70 @@ password expires:
 <list of users> 
 # chage --list <user> 
 Password inactive                                       : <date>",,305
-18,"Verify no users with a have Password change date in the future: 
+178,"Verify no users with a have Password change date in the future: 
 # cat /etc/shadow | cut -d: -f1 
 <list of users> 
 # chage --list <user> 
 Last Change                                             : <date>",,307
-18,"Run the following script and verify no results are returned: 
+179,"Run the following script and verify no results are returned: 
 egrep -v ""^\+"" /etc/passwd | awk -F: '($1!=""root"" && $1!=""sync"" && 
 $1!=""shutdown"" && $1!=""halt"" && $3<1000 && $7!=""/usr/sbin/nologin"" && 
 $7!=""/bin/false"") {print}'",,308
-18,"Run the following command and verify the result is 0: 
+180,"Run the following command and verify the result is 0: 
 # grep ""^root:"" /etc/passwd | cut -f4 -d: 
 0",,310
-18,"Run the following commands and verify all umask lines returned are 027 or more 
+181,"Run the following commands and verify all umask lines returned are 027 or more 
 restrictive. 
 # grep ""umask"" /etc/bash.bashrc 
 umask 027 
 # grep ""umask"" /etc/profile /etc/profile.d/*.sh 
 umask 027",,311
-18,"Run the following commands and verify all TMOUT lines returned are 900 or less and at 
+182,"Run the following commands and verify all TMOUT lines returned are 900 or less and at 
 least one exists in each file. 
 # grep ""^TMOUT"" /etc/bashrc 
 TMOUT=600 
 # grep ""^TMOUT"" /etc/profile 
 TMOUT=600",,313
-18,# cat /etc/securetty,,315
-18,"Run the following command and verify output includes matching line: 
+182,# cat /etc/securetty,,315
+183,"Run the following command and verify output includes matching line: 
 # grep pam_wheel.so /etc/pam.d/su 
 auth required pam_wheel.so 
  
 Run the following command and verify users in wheel group match site policy: 
 # grep wheel /etc/group 
 wheel:x:10:root,<user list>",,316
-18,,,318
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
+185,,,318
+186,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
 # stat /etc/passwd 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,320
-18,"Run the following command and verify Uid is 0/root, Gid is <gid>/shadow, and Access is 
+187,"Run the following command and verify Uid is 0/root, Gid is <gid>/shadow, and Access is 
 640 or more restrictive: 
 # stat /etc/shadow 
 Access: (0640/-rw-r-----)  Uid: (    0/    root)   Gid: (   42/  shadow)",,321
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
+188,"Run the following command and verify Uid and Gid are both 0/root and Access is 644: 
 # stat /etc/group 
 Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)",,322
-18,"Run the following command and verify verify Uid is 0/root, Gid is <gid>/shadow, and 
+189,"Run the following command and verify verify Uid is 0/root, Gid is <gid>/shadow, and 
 Access is 640 or more restrictive: 
 # stat /etc/gshadow 
 Access: (0640/-rw-r-----)  Uid: (    0/    root)   Gid: (   42/  shadow)",,323
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644 or 
+190,"Run the following command and verify Uid and Gid are both 0/root and Access is 644 or 
 more restrictive: 
 # stat /etc/passwd- 
 Access: (0644/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,324
-18,"Run the following command and verify verify Uid is 0/root, Gid is 0/root or 
+191,"Run the following command and verify verify Uid is 0/root, Gid is 0/root or 
 <gid>/shadow, and Access is 640 or more restrictive: 
 # stat /etc/shadow- 
 Access: (0640/-rw-r-----)  Uid: (    0/    root)   Gid: (   42/  shadow)",,325
-18,"Run the following command and verify Uid and Gid are both 0/root and Access is 644 or 
+192,"Run the following command and verify Uid and Gid are both 0/root and Access is 644 or 
 more restrictive: 
 # stat /etc/group- 
 Access: (0644/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)",,326
-18,"Run the following command and verify verify Uid is 0/root, Gid is 0/root or 
+193,"Run the following command and verify verify Uid is 0/root, Gid is 0/root or 
 <gid>/shadow, and Access is 640 or more restrictive: 
 # stat /etc/gshadow- 
 Access: (0640/-rw-r-----)  Uid: (    0/    root)   Gid: (   42/  shadow)",,327
-18,"Run the following command and verify no files are returned: 
+194,"Run the following command and verify no files are returned: 
 # df --local -P | awk {&#039;if (NR!=1) print $6&#039;} | xargs -I 
 &#039;{}&#039; find &#039;{}&#039; -xdev -type f -perm -0002 
  
@@ -1047,7 +1047,7 @@ on network mounted partitions. Additionally the --local option to df is not univ
 versions, it can be omitted to search all filesystems on a system including network mounted 
 filesystems or the following command can be run manually for each partition: 
 # find <partition> -xdev -type f -perm -0002",,328
-18,"Run the following command and verify no files are returned: 
+195,"Run the following command and verify no files are returned: 
 # df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev 
 -nouser 
  
@@ -1056,7 +1056,7 @@ on network mounted partitions. Additionally the --local option to df is not univ
 versions, it can be omitted to search all filesystems on a system including network mounted 
 filesystems or the following command can be run manually for each partition: 
 # find <partition> -xdev -nouser",,329
-18,"Run the following command and verify no files are returned: 
+196,"Run the following command and verify no files are returned: 
 # df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev 
 -nogroup 
  
@@ -1065,7 +1065,7 @@ on network mounted partitions. Additionally the --local option to df is not univ
 versions, it can be omitted to search all filesystems on a system including network mounted 
 filesystems or the following command can be run manually for each partition: 
 # find <partition> -xdev -nogroup",,330
-18,"Run the following command to list SUID files: 
+197,"Run the following command to list SUID files: 
 # df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev 
 -type f -perm -4000 
  
@@ -1074,7 +1074,7 @@ on network mounted partitions. Additionally the --local option to df is not univ
 versions, it can be omitted to search all filesystems on a system including network mounted 
 filesystems or the following command can be run manually for each partition: 
 # find <partition> -xdev -type f -perm -4000",,331
-18,"Run the following command to list SGID files: 
+198,"Run the following command to list SGID files: 
 # df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev 
 -type f -perm -2000 
  
@@ -1083,19 +1083,19 @@ on network mounted partitions. Additionally the --local option to df is not univ
 versions, it can be omitted to search all filesystems on a system including network mounted 
 filesystems or the following command can be run manually for each partition: 
 # find <partition> -xdev -type f -perm -2000",,333
-18,"Run the following command and verify that no output is returned: 
+200,"Run the following command and verify that no output is returned: 
 # cat /etc/shadow | awk -F: '($2 == """" ) { print $1 "" does not have a 
 password ""}'",,335
-18,"Run the following command and verify that no output is returned: 
+201,"Run the following command and verify that no output is returned: 
 # grep '^\+:' /etc/passwd",,337
-18,"Run the following command and verify that no output is returned: 
+202,"Run the following command and verify that no output is returned: 
 # grep '^\+:' /etc/shadow",,338
-18,"Run the following command and verify that no output is returned: 
+203,"Run the following command and verify that no output is returned: 
 # grep '^\+:' /etc/group",,339
-18,"Run the following command and verify that only ""root"" is returned: 
+204,"Run the following command and verify that only ""root"" is returned: 
 # cat /etc/passwd | awk -F: '($3 == 0) { print $1 }' 
 root",,340
-18,"Run the following script and verify no results are returned: 
+205,"Run the following script and verify no results are returned: 
 #!/bin/bash 
 if [ ""`echo $PATH | grep :: `"" != """" ]; then 
    echo ""Empty Directory in PATH (::)"" 
@@ -1124,7 +1124,7 @@ while [ ""$1"" != """" ]; do
    dirown=`ls -ldH $1 | awk '{print $3}'` 
    if [ ""$dirown"" != ""root"" ] ; then 
      echo $1 is not owned by root",,341
-18,"Run the following script and verify no results are returned: 
+206,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1134,7 +1134,7 @@ user dir; do
     echo ""The home directory ($dir) of user $user does not exist."" 
   fi 
 done",,343
-18,"Run the following script and verify no results are returned: 
+206,"Run the following script and verify no results are returned: 
 #!/bin/bash 
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1162,7 +1162,7 @@ $user""
     fi 
   fi 
 done",,344
-18,"Run the following script and verify no results are returned: 
+207,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1177,7 +1177,7 @@ user dir; do
    fi 
  fi 
 done",,346
-18,"Run the following script and verify no results are returned: 
+208,"Run the following script and verify no results are returned: 
 #!/bin/bash 
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1200,7 +1200,7 @@ dir; do
     done 
   fi 
 done",,348
-18,"Run the following script and verify no results are returned: 
+209,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1214,7 +1214,7 @@ dir; do
     fi 
   fi 
 done",,350
-18,"Run the following script and verify no results are returned: 
+210,"Run the following script and verify no results are returned: 
 #!/bin/bash 
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1228,7 +1228,7 @@ dir; do
     fi 
   fi 
 done",,352
-18,"Run the following script and verify no results are returned: 
+210,"Run the following script and verify no results are returned: 
 #!/bin/bash 
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1258,7 +1258,7 @@ dir; do
         if [ `echo $fileperm | cut -c10`  != ""-"" ]; then 
           echo ""Other Execute set on $file"" 
         fi",,354
-18,"Run the following script and verify no results are returned: 
+212,"Run the following script and verify no results are returned: 
 #!/bin/bash 
  
 cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != 
@@ -1274,7 +1274,7 @@ dir; do
     done 
   fi 
 done",,356
-18,"Run the following script and verify no results are returned: 
+213,"Run the following script and verify no results are returned: 
 #!/bin/bash 
  
 for i in $(cut -s -d: -f4 /etc/passwd | sort -u ); do 
@@ -1284,7 +1284,7 @@ for i in $(cut -s -d: -f4 /etc/passwd | sort -u ); do
 /etc/group"" 
  fi 
 done",,358
-18,"Run the following script and verify no results are returned: 
+214,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/passwd | cut -f3 -d"":"" | sort -n | uniq -c | while read x ; do 
@@ -1295,7 +1295,7 @@ cat /etc/passwd | cut -f3 -d"":"" | sort -n | uniq -c | while read x ; do
    echo ""Duplicate UID ($2): ${users}"" 
  fi 
 done",,359
-18,"Run the following script and verify no results are returned: 
+215,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/group | cut -f3 -d"":"" | sort -n | uniq -c | while read x ; do 
@@ -1306,7 +1306,7 @@ cat /etc/group | cut -f3 -d"":"" | sort -n | uniq -c | while read x ; do
    echo ""Duplicate GID ($2): ${groups}"" 
  fi 
 done",,360
-18,"Run the following script and verify no results are returned: 
+216,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/passwd | cut -f1 -d"":"" | sort -n | uniq -c | while read x ; do 
@@ -1317,7 +1317,7 @@ cat /etc/passwd | cut -f1 -d"":"" | sort -n | uniq -c | while read x ; do
    echo ""Duplicate User Name ($2): ${uids}"" 
  fi 
 done",,362
-18,"Run the following script and verify no results are returned: 
+217,"Run the following script and verify no results are returned: 
 #!/bin/bash  
  
 cat /etc/group | cut -f1 -d"":"" | sort -n | uniq -c | while read x ; do 
@@ -1328,6 +1328,6 @@ cat /etc/group | cut -f1 -d"":"" | sort -n | uniq -c | while read x ; do
    echo ""Duplicate Group Name ($2): ${gids}"" 
  fi 
 done",,363
-18,"Run the following commands and verify no results are returned: 
+218,"Run the following commands and verify no results are returned: 
 # grep ^shadow:[^:]*:[^:]*:[^:]+ /etc/group 
 # awk -F: '($4 == ""<shadow-gid>"") { print }' /etc/passwd",,364
