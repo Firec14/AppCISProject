@@ -9,13 +9,12 @@ doc = fitz.open("CIS_Ubuntu_Linux_14.04_LTS_Benchmark_v2.1.0_ARCHIVE.pdf")
 chapters = []
 chapter_map = {}  # title -> (chapter_id, page_number)
 chapter_id = 0
-toc_found = False
 toc_started = False
 
 for page_number, page in enumerate(doc, start=1):
     text = page.get_text()
 
-    # Începem extragerea după ce detectăm "Table of Contents"
+    # Detectare început cuprins
     if not toc_started and "Table of Contents" in text:
         toc_started = True
 
@@ -24,17 +23,18 @@ for page_number, page in enumerate(doc, start=1):
         for line in lines:
             match = re.match(r"^(\d+(\.\d+)+)\s+(.+?)\s+\.{3,}\s+(\d+)$", line.strip())
             if match:
-                number, _, title, pg = match.groups()
-                full_title = f"{number} {title}"
+                index, _, title_part, pg = match.groups()
+                full_title = f"{index} {title_part}"
                 pg_num = int(pg)
+
                 if full_title not in chapter_map:
                     chapter_id += 1
-                    chapters.append((chapter_id, full_title, pg_num))
+                    chapters.append((chapter_id, index, full_title, pg_num))
                     chapter_map[full_title] = (chapter_id, pg_num)
 
+        # Ieșim când dăm de sfârșitul cuprinsului
         if "Appendix" in text:
-            break  # sfârșitul cuprinsului
-
+            break
 
 # 2. Parcurge restul paginilor pentru a extrage audit/remediation
 audit_info = []
@@ -82,7 +82,9 @@ for page_number, page in enumerate(doc, start=1):
 
 # 3. Scriere CSV
 with open("chapters.csv", "w", newline='', encoding="utf-8") as f:
-    csv.writer(f).writerows([["chapter_id", "title", "page_number"]] + chapters)
+    writer = csv.writer(f)
+    writer.writerow(["chapter_id", "hierarchy_index", "title", "page_number"])
+    writer.writerows(chapters)
 
 with open("audit_info.csv", "w", newline='', encoding="utf-8") as f:
     csv.writer(f).writerows([["chapter_id", "method", "output", "page_number"]] + audit_info)
@@ -90,4 +92,4 @@ with open("audit_info.csv", "w", newline='', encoding="utf-8") as f:
 with open("remediation.csv", "w", newline='', encoding="utf-8") as f:
     csv.writer(f).writerows([["chapter_id", "remediation", "page_number"]] + remediations)
 
-print("CSV-urile au fost completate corect.")
+print("✔️ CSV-urile au fost completate corect.")
